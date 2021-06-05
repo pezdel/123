@@ -1,0 +1,12 @@
+.dropdown-menu {
+      height: 150px;
+      overflow-y: scroll;
+    }
+.dropdown-currency{
+  width:400px;
+  height:200px;
+}
+.box{
+  width:200px;
+  float:left;
+}

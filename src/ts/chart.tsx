@@ -1,8 +1,9 @@
-import React from 'react';
+import React from "react";
+import { Dropdowns } from './dropdown'
 
-export default function Chart()
-{    return (
-      <>
-          <p>This is ffa ssss ssssaaaecaaation</p>
-      </>
-  );}
+export default function Chart() {
+  return (
+      <Dropdowns />
+      
+  );
+}
