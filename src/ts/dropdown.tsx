@@ -13,7 +13,7 @@ const timeframe = [
   { value: '1w', label: '1w' },
 ];
 
-export function Dropdowns() {
+export function Dropdown() {
   const [selectedOption, setSelectedOption] = useState<any>(null);
   const [tfOption, setTFOption] = useState<any>(null);
 
@@ -26,7 +26,6 @@ export function Dropdowns() {
         options={currency}
       />
       <Select
-        className="box"
         defaultValue={tfOption}
         onChange={setTFOption}
         options={timeframe}

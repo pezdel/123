@@ -4,9 +4,22 @@
     }
 .dropdown-currency{
   width:400px;
-  height:200px;
 }
 .box{
   width:200px;
   float:left;
+
+}
+
+.chart-main{
+  position: relative;
+}
+
+.Chart{
+  position: absolute;
+  left:10%;
+  right:10%;
+  height:80vh;
+
+  background-color: burlywood;
 }

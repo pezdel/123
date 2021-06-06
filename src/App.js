@@ -1,12 +1,12 @@
 import React from 'react'
-import Chart from './ts/chart'
+import DashboardChart from './ts/dashboardChart'
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   return (
     <div className="App">
       <h1>skldfj</h1>
-      <Chart />
-      <h1>skldjfsas</h1>
+      <DashboardChart />
     </div>
   );
 }

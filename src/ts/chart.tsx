@@ -1,9 +1,11 @@
-import React from "react";
-import { Dropdowns } from './dropdown'
+import React from 'react'
+//import { data } from './...'
 
-export default function Chart() {
-  return (
-      <Dropdowns />
-      
-  );
+
+export function Chart() {
+      return (
+            <div className="Chart">
+                  <h1>adam</h1>
+            </div>
+      )
 }

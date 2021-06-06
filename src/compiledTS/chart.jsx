@@ -4,9 +4,8 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 var react_1 = __importDefault(require("react"));
+var dropdown_1 = require("./dropdown");
 function Chart() {
-    return (<>
-          <p>This is ffa ssss ssssaaaecaaation</p>
-      </>);
+    return (<dropdown_1.Dropdowns />);
 }
 exports.default = Chart;
