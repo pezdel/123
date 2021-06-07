@@ -1,6 +1,6 @@
 import React from "react";
 import { Dropdown } from './dropdown'
-import { Chart } from './chartComponets/chart'
+import { Chart } from './chart'
 
 export default function DashboardChart() {
   return (
