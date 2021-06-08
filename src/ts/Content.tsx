@@ -3,15 +3,21 @@ import { AuthContext } from "./AuthContainer";
 
 export const Content: React.FC = () => {
   const { loggedIn, checkAuth } = useContext(AuthContext);
-  const { data, checkData } = useContext(AuthContext);
+  const { data, setData } = useContext(AuthContext);
   const { FD, getFD } = useContext(AuthContext);
-  console.log(FD)
 
+
+  const handleSubmit = () => {
+        setData("AUDUSD")
+  }
+  const handleSubmits = () => {
+      setData("GBPUSD")
+}
   return (
     <div>
-      {loggedIn ? "Welcome back!" : <button onClick={checkAuth}>Log In</button>}
-      {<button onClick={checkData}>{data}</button>}
-      {<button onClick={getFD}>adsadasdasdasd</button>}
+          <h1>{data}</h1>
+      {<button onClick={handleSubmit}>adsadasdasdasd</button>}
+      {<button onClick={handleSubmits}>adsadasdasdasd</button>}
     </div>
   );
 };

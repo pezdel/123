@@ -1,15 +1,11 @@
 import React from 'react'
 import DashboardChart from './ts/dashboardChart'
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Canvas } from './ts/Canvas'
+import { Content } from './ts/Content'
 
-function App() {
-  return (
-    <div className="App">
-      <h1>skldfj</h1>
-      <Canvas />
-    </div>
-  );
-}
+const App: React.FC = () => {
+  return <Content />;
+};
+
 
 export default App;
