@@ -10,7 +10,6 @@ export function Chart() {
       }
       return (
             <div className="Chart">
-                   {<button onClick={handleSubmits}>adsadasdasdasd</button>}     
             </div>
       )
 }

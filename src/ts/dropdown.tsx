@@ -13,9 +13,7 @@ const timeframe = [
   { value: '1d', label: '1d' },
   { value: '1w', label: '1w' },
 ];
-//just want dropdown its own component thatn you can plug and it works on the main compoenent
-//main component needs to work w/o dropdown
-//so on submit it should get data and call a function to set it
+
 export function Dropdown() {
   const [selectedOption, setSelectedOption] = useState<any>(null);
   const [tfOption, setTFOption] = useState<any>(null);

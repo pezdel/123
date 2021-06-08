@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { OnLoad, onClick } from './getData'
 
 interface MyObj {
@@ -13,8 +13,14 @@ export const AuthContainer: React.FC = props => {
   const [data, setData] = useState<any>();
 
  
-  const checkData = () => {
-    };
+  useEffect(() =>{ 
+    const fetchData = async () =>{
+      const rawResponse = await fetch('/onLoad');
+      const content = await rawResponse.json();
+      setData(await content)
+    }
+    fetchData()
+  },[]) 
 
   
   const value: AuthContextShape = {
