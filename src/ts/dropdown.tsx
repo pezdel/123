@@ -26,6 +26,7 @@ export function Dropdown() {
         options={currency}
       />
       <Select
+        className="box"
         defaultValue={tfOption}
         onChange={setTFOption}
         options={timeframe}

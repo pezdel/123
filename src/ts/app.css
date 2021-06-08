@@ -3,11 +3,11 @@
       overflow-y: scroll;
     }
 .dropdown-currency{
+  display: flex;
   width:400px;
 }
 .box{
   width:200px;
-  float:left;
 
 }
 

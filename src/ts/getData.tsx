@@ -23,11 +23,7 @@ export const onClick = async () => {
 }
 
 
-export const GetData: React.FC = () => {
-      const { getFD } = useContext(AuthContext)
-      getFD()
-      return(<></>)
-}
+
 
 
 

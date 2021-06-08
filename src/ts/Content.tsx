@@ -1,10 +1,10 @@
 import React, { useContext } from "react";
 import { AuthContext } from "./AuthContainer";
+import { Chart } from './chart'
+import { Dropdown } from './dropdown'
 
 export const Content: React.FC = () => {
-  const { loggedIn, checkAuth } = useContext(AuthContext);
   const { data, setData } = useContext(AuthContext);
-  const { FD, getFD } = useContext(AuthContext);
 
 
   const handleSubmit = async () => {
@@ -17,9 +17,11 @@ export const Content: React.FC = () => {
       console.log(data)
 }
   return (
-    <div>
+    <div className="chart-main">
+      <Dropdown />
       {<button onClick={handleSubmit}>adsadasdasdasd</button>}
       {<button onClick={handleSubmits}>adsadasdasdasd</button>}
+      <Chart />
     </div>
   );
 };
