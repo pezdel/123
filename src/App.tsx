@@ -1,11 +1,25 @@
-import React from 'react'
-import DashboardChart from './ts/dashboardChart'
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { Content } from './ts/Content'
+import React from "react";
+import "bootstrap/dist/css/bootstrap.min.css";
+import { Content } from "./ts/Content";
+import { Dropdown } from "./ts/dropdown";
 
 const App: React.FC = () => {
-  return <Content />;
+  
+  return (
+    <div className="chart-main">
+      <Dropdown />
+      <Content />
+    </div>
+  );
 };
 
-
 export default App;
+
+
+
+//onEffects
+//onLoad-----------done
+//onClick----------done
+
+//data change -> to re-window(0-40) re-scale re-draw
+//click move -> to re-window(var from click) re-scale re-draw

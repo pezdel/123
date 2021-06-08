@@ -13,14 +13,7 @@ export const AuthContainer: React.FC = props => {
   const [data, setData] = useState<any>();
 
  
-  useEffect(() =>{ 
-    const fetchData = async () =>{
-      const rawResponse = await fetch('/onLoad');
-      const content = await rawResponse.json();
-      setData(await content)
-    }
-    fetchData()
-  },[]) 
+  
 
   
   const value: AuthContextShape = {
