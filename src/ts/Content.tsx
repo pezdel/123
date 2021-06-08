@@ -7,15 +7,17 @@ export const Content: React.FC = () => {
   const { FD, getFD } = useContext(AuthContext);
 
 
-  const handleSubmit = () => {
-        setData("AUDUSD")
+  const handleSubmit = async () => {
+    const rawResponse = await fetch('/onLoad');
+    const content = await rawResponse.json();
+    setData(await content)
+    
   }
   const handleSubmits = () => {
-      setData("GBPUSD")
+      console.log(data)
 }
   return (
     <div>
-          <h1>{data}</h1>
       {<button onClick={handleSubmit}>adsadasdasdasd</button>}
       {<button onClick={handleSubmits}>adsadasdasdasd</button>}
     </div>

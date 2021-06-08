@@ -12,6 +12,7 @@ import { AuthContext } from './AuthContainer'
 export const OnLoad = async () => {
       const rawResponse = await fetch('/onLoad');
       const content = await rawResponse.json();
+      
 }
 
 export const onClick = async () => {

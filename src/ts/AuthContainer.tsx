@@ -12,9 +12,15 @@ export interface ISubmitResult {
       success: boolean;
       message: string;
     }
-export const AuthContainer: React.FC = props => {
+  export const handleSubmit = async () => {
+    const rawResponse = await fetch('/onLoad');
+    const content = await rawResponse.json();
+    return content
+  }
+
+    export const AuthContainer: React.FC = props => {
   const [loggedIn, setLoggedIn] = useState<boolean>(false);
-  const [data, setData] = useState("EURUSD");
+  const [data, setData] = useState<any>();
   const [FD, setFD] = useState<MyObj[]>([{
       "date": "01/15/2001",
       "open": 1.2222,
@@ -31,7 +37,6 @@ export const AuthContainer: React.FC = props => {
         console.log("hi")
   }
   const checkData = () => {
-      setData("true");
     };
 
   const checkAuth = () => {
@@ -57,7 +62,7 @@ export const AuthContainer: React.FC = props => {
 export type AuthContextShape = {
   loggedIn: boolean;
   checkAuth: () => void;
-  data: string;
+  data: any;
   checkData: ()=> void;
   FD: MyObj[];
   getFD: () => void;
