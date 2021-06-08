@@ -21,7 +21,6 @@ export const Content: React.FC = () => {
       <Dropdown />
       {<button onClick={handleSubmit}>adsadasdasdasd</button>}
       {<button onClick={handleSubmits}>adsadasdasdasd</button>}
-      <Chart />
     </div>
   );
 };
