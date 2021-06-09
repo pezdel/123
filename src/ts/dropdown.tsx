@@ -17,7 +17,7 @@ const timeframe = [
 export function Dropdown() {
   const [selectedOption, setSelectedOption] = useState<any>(null);
   const [tfOption, setTFOption] = useState<any>(null);
-  const { setData } = useContext(AuthContext);
+  const { data, setData } = useContext(AuthContext);
       const handleSubmits = async () => {
         if(selectedOption != null && tfOption != null){
           const rawResponse = await fetch('/onClick');

@@ -10,7 +10,7 @@ interface MyObj {
   }
  
 export const AuthContainer: React.FC = props => {
-  const [data, setData] = useState<any>();
+  const [data, setData] = useState<any>([]);
 
  
   
