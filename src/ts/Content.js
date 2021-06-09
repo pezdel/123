@@ -11,7 +11,6 @@ export const Content = () => {
   const [start, setStart, startRef] = useState(0)
   let testSpot = 0;
 
-  
 
   useEffect(() => {
   }, []);//when mousemove
@@ -37,19 +36,19 @@ export const Content = () => {
 
 
 
-const checkBoundary = async(testSpot) =>{
-  if (testSpot>min && testSpot <max){
-    console.log("New spot = testspot (start-jump) .." +testSpot)
-    return testSpot
-  }
-  else{return startRef.current}
-}
-
 const getData = async () => {
   const testSpot = startRef.current - jump
   setStart(await checkBoundary(testSpot))
-  console.log("actualSpot = " + startRef.current)
-  setWindow()
+  const plot = setWindow()
+  const x = scaleWindow(await plot)
+  console.log(await x)
+}
+
+const checkBoundary = async(testSpot) =>{
+  if (testSpot>min && testSpot <max){
+    return testSpot
+  }
+  else{return startRef.current}
 }
 
 const setWindow = async() => {
@@ -58,16 +57,43 @@ const setWindow = async() => {
   for (i = startRef.current; i<(startRef.current + windowSize); i++){
     plot.push(data.result[i])
   }
+  return plot;
 }
 
-
+const scaleWindow = async(plot) => {
+  let high =0;
+  let low
+  
+  plot.forEach(el =>{
+    high = el.high > high ? el.high : high;
+    low = !low || el.low < low ? el.low : low;
+  })
+  let scale = high-low;
+  var spaceTop = scale / 100,  //update cavans h/w and clear rect h/w (draw())
+          spaceBot = 5;
+      plot = plot.map(el => {
+          return {
+          low: (el.low - low)/scale,
+          high: (el.high - low)/scale,
+          open: (el.open - low)/scale,
+          close: (el.close - low)/scale,
+          date: el.date
+          // low: (100 - (scale - (high - el.low)) / spaceTop) * spaceBot, 
+          // high: (100 - (scale - (high - el.high)) / spaceTop) * spaceBot,
+          // open: (100 - (scale - (high - el.open)) / spaceTop) * spaceBot,
+          // close: (100 - (scale - (high - el.close)) / spaceTop) * spaceBot,
+          // date: el.date
+          };
+      });
+      console.log(plot)
+  return plot;
+}
 
 
 const hi = () => {
   setJump(50)
   getData()
 }
-
 
 
   return( 
