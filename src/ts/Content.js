@@ -1,4 +1,4 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useRef } from "react";
 import useState from "react-usestateref";
 import { AuthContext } from "./AuthContainer";
 import { scale } from "./scale";
@@ -11,15 +11,21 @@ export const Content = () => {
   const [max, setMax] = useState(0);
   const [min, setMin] = useState(0);
   const [start, setStart, startRef] = useState(0);
+  const [ startX, setStartX, startXRef ] = useState(0);
+  const [isDrawing, setIsDrawing] = useState(false)
   let testSpot = 0;
 
   useEffect(()=>{
-
-  },[])
+    if (data.length !== 0) {
+      getData();
+    }
+    
+  },[jump])
   useEffect(() => {
     if (data.length !== 0) {
+      setJump(0)
       setStart(data.result.length - windowSize);
-      setMax(startRef.current + windowSize / 2);
+      setMax(data.result.length - windowSize);
       setMin(windowSize);
       getData();
     } else {
@@ -52,18 +58,33 @@ export const Content = () => {
     return plot;
   };
 
-  const hi = () => {
-    setJump(50);
-    getData();
+  
+  const startDrawing = ({ nativeEvent }) => {
+    const { offsetX, offsetY  } = nativeEvent;
+    console.log(offsetX)
+    setStartX(offsetX)
+
+    setIsDrawing(true);
   };
-  const startDrawing = () => {
-    console.log("working")
-  }
+  const draw = ({ nativeEvent }) => {
+    if (!isDrawing) {
+      return;
+    }
+    const { offsetX, offsetY } = nativeEvent;
+    setJump(Math.ceil((offsetX - startXRef.current)/20))
+    //console.log(Math.ceil((offsetX - startXRef.current)/4))
+  };
+  const finishDrawing = () => {
+    setIsDrawing(false);
+  };
+
+
   return (
     <div className="chart-main">
-      {<button onClick={hi}>this one</button>}
       <canvas id="can" width={700} height={500}
-      onMouseDown={startDrawing}>
+        onMouseDown={startDrawing}
+        onMouseUp={finishDrawing}
+        onMouseMove={draw}>
       
       </canvas>
     </div>
