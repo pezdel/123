@@ -8,30 +8,27 @@ interface MyObj {
       low: number;
       close: number;
   }
- 
 export const AuthContainer: React.FC = props => {
   const [data, setData] = useState<any>([]);
 
- 
+  useEffect(() => {}, []); //when mousemove
   
 
+  
   
   const value: AuthContextShape = {
       data,
       setData
   }
-
   return (
     <AuthContext.Provider value={value}>
       {props.children}
     </AuthContext.Provider>
   );
 };
-
 export type AuthContextShape = {
   data: any;
   setData: any;
 };
-
 export const AuthContext = React.createContext({} as AuthContextShape);
 

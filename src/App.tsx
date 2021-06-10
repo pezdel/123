@@ -1,4 +1,5 @@
 import React from "react";
+import { AuthContainer } from "./ts/AuthContainer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Content } from "./ts/Content";
 import { Dropdown } from "./ts/dropdown";
@@ -7,12 +8,13 @@ const App: React.FC = () => {
   
   return (
     <div className="chart-main">
-      <Dropdown />
-      <Content />
+      <AuthContainer>
+        <Dropdown />
+        <Content />
+      </AuthContainer>
     </div>
   );
 };
-
 export default App;
 
 

@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from "./AuthContainer";
 import Select from 'react-select';
 import './app.css'
@@ -15,8 +15,8 @@ const timeframe = [
 ];
 
 export function Dropdown() {
-  const [selectedOption, setSelectedOption] = useState<any>(null);
-  const [tfOption, setTFOption] = useState<any>(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+  const [tfOption, setTFOption] = useState(null);
   const { data, setData } = useContext(AuthContext);
       const handleSubmits = async () => {
         if(selectedOption != null && tfOption != null){
@@ -25,6 +25,15 @@ export function Dropdown() {
           setData(await content)
         }
       }
+
+      useEffect(() => {
+        const fetchData = async () => {
+          const rawResponse = await fetch("/onLoad");
+          const content = await rawResponse.json();
+          setData(await content);
+        };
+        fetchData();
+      }, []);
 
   return (
     <div className="dropdown-currency">
