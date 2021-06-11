@@ -1,25 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
+import useState from "react-usestateref";
 import { GetData } from "./GetData";
 
 export const AuthContainer = (props) => {
   const [data, setData] = useState([]);
-  const [jump, setJump] = useState(0);
+  const [jump, setJump, jumpRef ] = useState(0);
   const [max, setMax] = useState(0);
   const [min, setMin] = useState(0);
-  const [start, setStart] = useState(0);
+  const [start, setStart, startRef ] = useState(0);
   const [windowSize, setWindowSize] = useState(150);
 
-  useEffect(() => {
-    if (data.length !== 0) {
-      setJump(0);
-      setStart(data.result.length - windowSize);
-      setMax(data.result.length - windowSize);
-      setMin(windowSize);
-      GetData();
-    } else {
-      //ToDo...something if data doesnt get loaded (onLoad mainly)
-    }
-  }, [data]);
+  
 
   useEffect(() => {
     if (data.length !== 0) {
@@ -32,10 +23,14 @@ export const AuthContainer = (props) => {
     setData,
     jump,
     setJump,
+    jumpRef,
     max,
+    setMax,
+    setMin,
     min,
     start,
     setStart,
+    startRef,
     windowSize,
   };
   return (

@@ -3,6 +3,7 @@ import { AuthContainer } from "./ts/AuthContainer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Content } from "./ts/Content";
 import { Dropdown } from "./ts/dropdown";
+import { GetData } from './ts/GetData'
 
 const App: React.FC = () => {
   
@@ -11,6 +12,7 @@ const App: React.FC = () => {
       <AuthContainer>
         <Dropdown />
         <Content />
+        <GetData />
       </AuthContainer>
     </div>
   );

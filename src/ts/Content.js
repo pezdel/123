@@ -1,11 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useContext } from "react";
 import useState from "react-usestateref";
 import { AuthContext } from "./AuthContainer";
 
 export const Content = () => {
-  const [startX, setStartX, startXRef] = useStateRef(0);
+  const [startX, setStartX, startXRef] = useState(0);
   const [isDrawing, setIsDrawing] = useState(false);
-  const [ setJump ] = useContext(AuthContext);
+  const { jump, setJump, jumpRef } = useContext(AuthContext);
 
   const startDrawing = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent;
