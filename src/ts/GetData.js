@@ -3,6 +3,7 @@ import useState from "react-usestateref";
 import { AuthContext } from "./AuthContainer";
 import { scale } from "./scale";
 import { Draw } from "./draw";
+import { DrawAxis } from './dates'
 
 
 export function GetData(){
@@ -13,6 +14,12 @@ export function GetData(){
   const { max, setMax } = useContext(AuthContext);
   const { start, setStart, startRef } = useContext(AuthContext);
   const { jump, setJump, jumpRef } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (data.length !== 0) {
+      startDraw();
+    }
+  }, [jump]);
 
 
   useEffect(() => {
@@ -51,6 +58,7 @@ export function GetData(){
     const plot = setWindow();
     const x = scale(await plot);
     Draw(await x);
+    DrawAxis(await x);
   }
   return (
   <div>

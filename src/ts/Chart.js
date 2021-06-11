@@ -1,6 +1,7 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import useState from "react-usestateref";
 import { AuthContext } from "./AuthContainer";
+
 
 export const Chart = () => {
   const [startX, setStartX, startXRef] = useState(0);

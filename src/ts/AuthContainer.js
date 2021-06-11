@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import useState from "react-usestateref";
-import { GetData } from "./GetData";
 
 export const AuthContainer = (props) => {
   const [data, setData] = useState([]);
@@ -12,11 +11,7 @@ export const AuthContainer = (props) => {
 
   
 
-  useEffect(() => {
-    if (data.length !== 0) {
-      GetData();
-    }
-  }, [jump]);
+  
 
   const value = {
     data,
