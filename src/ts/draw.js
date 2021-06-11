@@ -1,4 +1,4 @@
-import React from "react";
+import { DrawAxis } from './dates'
 
 //so for this one...With plot I need to plug it into the div
 //which will hold the chart.
@@ -35,7 +35,7 @@ export function Draw(plot) {
     ctx.stroke()
     x+=4
 
-
+    //DrawAxis(plot, x, ctxTemp_height)
   });
 
   return (
