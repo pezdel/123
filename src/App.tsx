@@ -1,7 +1,7 @@
 import React from "react";
 import { AuthContainer } from "./ts/AuthContainer";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Content } from "./ts/Content";
+import { Chart } from "./ts/Chart";
 import { Dropdown } from "./ts/dropdown";
 import { GetData } from './ts/GetData'
 
@@ -11,7 +11,7 @@ const App: React.FC = () => {
     <div className="chart-main">
       <AuthContainer>
         <Dropdown />
-        <Content />
+        <Chart />
         <GetData />
       </AuthContainer>
     </div>

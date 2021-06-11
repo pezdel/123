@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import useState from "react-usestateref";
 import { AuthContext } from "./AuthContainer";
 
-export const Content = () => {
+export const Chart = () => {
   const [startX, setStartX, startXRef] = useState(0);
   const [isDrawing, setIsDrawing] = useState(false);
   const { jump, setJump, jumpRef } = useContext(AuthContext);
