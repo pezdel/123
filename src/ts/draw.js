@@ -3,13 +3,10 @@ import { drawAxis } from './drawAxis'
 
 export function draw(plot, ctx) {
   let x = 10;
- 
   // ctx.beginPath()
   // ctx.moveTo(0,0)
   // ctx.lineTo(300,150)
   // ctx.stroke()
-
-  let compareDate = 0;
   plot.forEach((el) => {
     if (el.open > el.close) {
       ctx.strokeStyle = "green";

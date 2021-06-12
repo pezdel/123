@@ -35,19 +35,12 @@ export function GetData() {
 
   const setWindow = async () => {
     const testSpot = startRef.current - jumpRef.current;
-    const plot = [{}];
+    const plot = [];
     let i;
     setStart(await checkBoundary(testSpot));
-    console.log(
-      "testSpot = " +
-        testSpot +
-        "startRef = " +
-        startRef.current +
-        "JumpRef = " +
-        jumpRef.current
-    );
     for (i = startRef.current; i < startRef.current + windowSize; i++) {
-      plot.push(data.result[i]);
+      //plot.push(Object.values(data.result[i]))
+      plot.push(data.result[i])
     }
     return plot;
   };
@@ -60,16 +53,26 @@ export function GetData() {
     }
   };
 
+  const test = async(plot, compareDate) =>{
+      if(compareDate == 0){
+        return plot[0].date
+      }
+  }
+
   const startDraw = async () => {
+    let compareDate = 0;
     const plot = setWindow();
     const x = scale(await plot);
+    compareDate = test(await plot, compareDate)
 
     const can = document.getElementById("can"),
-      ctx = can.getContext("2d");
-    const ctxTemp_height = can.height;
+       ctx = can.getContext("2d");
+    const ctxTemp_height = can.height,
+          ctxTemp_width = can.width;
     ctx.clearRect(0, 0, 700, 500);
+
     draw(await x, ctx);
-    drawAxis(await x, tfRef.current, ctx);
+    drawAxis(await x, tfRef.current, ctx, await compareDate, ctxTemp_height, ctxTemp_width);
   };
 
   return <div></div>;

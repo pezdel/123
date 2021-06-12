@@ -8,7 +8,7 @@ export const AuthContainer = (props) => {
   const [max, setMax] = useState(0);
   const [min, setMin] = useState(0);
   const [start, setStart, startRef ] = useState(0);
-  const [windowSize, setWindowSize] = useState(15);
+  const [windowSize, setWindowSize] = useState(150);
 
   
 
