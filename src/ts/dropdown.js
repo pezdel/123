@@ -18,6 +18,7 @@ export function Dropdown() {
   const [selectedOption, setSelectedOption] = useState(null);
   const [tfOption, setTFOption] = useState(null);
   const { data, setData } = useContext(AuthContext);
+  const { setTF } = useContext(AuthContext)
       const handleSubmits = async () => {
         if(selectedOption != null && tfOption != null){
           const rawResponse = await fetch('/onClick');
@@ -31,6 +32,7 @@ export function Dropdown() {
           const rawResponse = await fetch("/onLoad");
           const content = await rawResponse.json();
           setData(await content);
+          setTF("1h")
         };
         fetchData();
       }, []);

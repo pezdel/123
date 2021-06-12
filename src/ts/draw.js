@@ -1,20 +1,15 @@
-import { DrawAxis } from './dates'
+import { drawAxis } from './drawAxis'
 
-//so for this one...With plot I need to plug it into the div
-//which will hold the chart.
 
-export function Draw(plot) {
-  var can = document.getElementById("can"),
-    ctx = can.getContext("2d")
-  
-  ctx.clearRect(0, 0, 700, 500);
+export function draw(plot, ctx) {
+  let x = 10;
+ 
   // ctx.beginPath()
   // ctx.moveTo(0,0)
   // ctx.lineTo(300,150)
   // ctx.stroke()
-  var x = 10,
-    ctxTemp_width = can.width,
-    ctxTemp_height = can.height;
+
+  let compareDate = 0;
   plot.forEach((el) => {
     if (el.open > el.close) {
       ctx.strokeStyle = "green";
@@ -34,10 +29,8 @@ export function Draw(plot) {
     ctx.lineTo(x, el.close)
     ctx.stroke()
     x+=4
-
-    //DrawAxis(plot, x, ctxTemp_height)
   });
-
+  
   return (
     <div>
     </div>
