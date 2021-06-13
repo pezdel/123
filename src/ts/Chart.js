@@ -26,6 +26,10 @@ export const Chart = () => {
 
   return (
     <div className="chart-main">
+      <canvas id= "can-date"
+      width={700}
+      hight={500}
+      ></canvas>
       <canvas
         id="can"
         width={700}
@@ -34,6 +38,7 @@ export const Chart = () => {
         onMouseUp={finishDrawing}
         onMouseMove={draw}
       ></canvas>
+      
     </div>
   );
 };

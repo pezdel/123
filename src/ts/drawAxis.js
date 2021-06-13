@@ -1,5 +1,8 @@
 import { draw } from "./draw";
 
+//sike I want it to take roundish numbers and have them float to next level
+//figure out way to overlap canvas's? bars, dates, price and then snipit
+
 const getDate = (date) => {
     let df = new Date(date * 1000)
     let Year = df.getFullYear(),
@@ -22,32 +25,40 @@ const addAxis = (date, x, ctx, ctxTemp_height, ctxTemp_width) => {
     ctx.fillText(date, x, (ctxTemp_height-25))
 }
 
-export const drawAxis = async(plot, tf, ctx, compareDate, ctxTemp_height, ctxTemp_width) =>{
+export const drawAxis = async(plot, tf, compareDate) =>{
+    const can = document.getElementById("can-date"),
+       ctx = can.getContext("2d");
+    const ctxTemp_height = can.height,
+          ctxTemp_width = can.width;
+    ctx.clearRect(0, 0, 700, 500);
     let x=10;
     let compare = getDate(compareDate)
-    plot.forEach((el) => {
-        let date = getDate(el.date)
-        switch(tf){
-            case '1h':
-                if(date.Day != compare.Day){
-                    compare.Day = date.Day;
-                    addAxis(date.Day, x, ctx, ctxTemp_height, ctxTemp_width)
-                }
-                break
-            case '1d':
-                if(date.Month != compare.Month){
+
+    switch(tf){
+       case '1h':
+           plot.forEach((el)=>{
+               let date= getDate(el.date)
+               if(date.Day != compare.Day){
+                compare.Day = date.Day;
+                addAxis(date.Day, x, ctx, ctxTemp_height, ctxTemp_width)
+            }x+=4
+           })
+        case '1d':
+            plot.forEach((el)=>{
+                let date=getDate(el.date)
+                if(date.Month!=compare.Month){
                     compare.Month = date.Month;
-                    addAxis(date.Month, x, ctx, ctxTemp_height, ctxTemp_width);
-                }
-                break
-            case '1w':
-                if(date.Month != compare.Month){
+                    addAxis(date.Month, x, ctx, ctxTemp_height,)
+                }x+=4
+            }) 
+        case '1w':
+            plot.forEach((el)=>{
+                let date=getDate(el.date)
+                if(date.Month!=compare.Month){
                     compare.Month = date.Month;
-                    addAxis(date.Month, x, ctx, ctxTemp_height, ctxTemp_width);
-                }
-                break
-        }
-        x+=4;
-    })
-    return(<div></div>)
+                    addAxis(date.Month, x, ctx, ctxTemp_height,)
+                }x+=4
+            })  
+    }
+    return (<div></div>)
 }

@@ -4,6 +4,7 @@ import { AuthContext } from "./AuthContainer";
 import { scale } from "./scale";
 import { draw } from "./draw";
 import { drawAxis } from './drawAxis'
+//import { drawPrice } from './drawPrice'
 
 export function GetData() {
   let testSpot = 0;
@@ -14,6 +15,7 @@ export function GetData() {
   const { max, setMax } = useContext(AuthContext);
   const { start, setStart, startRef } = useContext(AuthContext);
   const { jump, setJump, jumpRef } = useContext(AuthContext);
+ 
 
   useEffect(() => {
     if (data.length !== 0) {
@@ -33,16 +35,35 @@ export function GetData() {
     }
   }, [data]);
 
+
+  //lets just with full json, set markers for dates/price
+  //then window/scale the same
+  //then draw same
+  //add if marker = true to put on template? or seprate loop for those two. idk
+  
+
+  //for loops
+  //--setwindow
+  //--scale (move high/low)
+  //--2 if's compareDate, check boundrie
+  //--draw main
+  //--draw price/date
+
+  //maybe move scale inside of main draw?
   const setWindow = async () => {
     const testSpot = startRef.current - jumpRef.current;
     const plot = [];
-    let i;
+    let high =0,
+        low;
+   
     setStart(await checkBoundary(testSpot));
-    for (i = startRef.current; i < startRef.current + windowSize; i++) {
-      //plot.push(Object.values(data.result[i]))
+    for (let i = startRef.current; i < startRef.current + windowSize; i++) {
       plot.push(data.result[i])
+      high = data.result[i].high > high ? data.result[i].high : high;
+      low = !low || data.result[i].low < low ? data.result[i].low : low;
     }
-    return plot;
+    const scaled = high - low
+    return [plot, high, scaled]
   };
 
   const checkBoundary = async (testSpot) => {
@@ -53,26 +74,22 @@ export function GetData() {
     }
   };
 
-  const test = async(plot, compareDate) =>{
-      if(compareDate == 0){
-        return plot[0].date
-      }
+  const test = async(plot) =>{
+    return plot[0].date
   }
 
   const startDraw = async () => {
-    let compareDate = 0;
-    const plot = setWindow();
-    const x = scale(await plot);
-    compareDate = test(await plot, compareDate)
+    let [plot, high, scaled] = await setWindow();
+    const x = await scale(plot, scaled, high);
+    let compareDate = await test(plot)
 
-    const can = document.getElementById("can"),
-       ctx = can.getContext("2d");
-    const ctxTemp_height = can.height,
-          ctxTemp_width = can.width;
-    ctx.clearRect(0, 0, 700, 500);
+    //so maybe with full plot/df
+    //set markers for price/dates axis
+    //and they are drawn with the scaled/windowed plot..either inside or outside idk
 
-    draw(await x, ctx);
-    drawAxis(await x, tfRef.current, ctx, await compareDate, ctxTemp_height, ctxTemp_width);
+    draw(await x);
+    drawAxis(await x, tfRef.current, await compareDate);
+    // drawPrice(await x)
   };
 
   return <div></div>;

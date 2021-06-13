@@ -23,3 +23,15 @@
 
   background-color: burlywood;
 }
+
+#chart-main{
+  position:relative;
+  width:700px;
+  height:500px;
+}
+#can-date{
+  position:absolute; top:0px; left:0px;
+  width:700px;
+  height:500px;
+  pointer-events: none;
+}

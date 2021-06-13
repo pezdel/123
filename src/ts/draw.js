@@ -1,7 +1,12 @@
 import { drawAxis } from './drawAxis'
 
 
-export function draw(plot, ctx) {
+export function draw(plot) {
+  const can = document.getElementById("can"),
+    ctx = can.getContext("2d");
+  const ctxTemp_height = can.height,
+    ctxTemp_width = can.width;
+  ctx.clearRect(0, 0, 700, 500);
   let x = 10;
   // ctx.beginPath()
   // ctx.moveTo(0,0)
