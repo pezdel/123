@@ -1,0 +1,53 @@
+.dropdown-menu {
+      height: 150px;
+      overflow-y: scroll;
+    }
+.dropdown-currency{
+  display: flex;
+  width:400px;
+}
+.box{
+  width:200px;
+
+}
+
+.chart-main{
+  position: relative;
+}
+
+.Chart{
+  position: absolute;
+  left:10%;
+  right:10%;
+  height:80vh;
+
+  background-color: burlywood;
+}
+
+#chart-main{
+  position:relative;
+  width:700px;
+  height:500px;
+}
+#can-date{
+  position:absolute; top:0px; left:0px;
+  width:700px;
+  height:500px;
+  pointer-events: none;
+}
+#zoom{
+   border:1px black solid;
+   box-shadow: 5px 5px 10px #1e1e1e;  
+   position:absolute; 
+   top:0; 
+   left:0;
+   display:none;
+}
+.chartWrapper{
+  overflow-x: scroll;
+  width: 500px
+}
+.chartAreaWrapper{
+  position: relative;
+  
+}

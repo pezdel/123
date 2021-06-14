@@ -1,9 +1,8 @@
 import React from "react";
-import { AuthContainer } from "./ts/AuthContainer";
+import { AuthContainer } from "./final/AuthContainer";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { Chart } from "./ts/Chart";
-import { Dropdown } from "./ts/dropdown";
-import { GetData } from "./ts/GetData";
+import { Dropdown } from "./final/dropdown";
+import { Chart } from "./final/chart";
 
 const App: React.FC = () => {
   return (
@@ -11,7 +10,6 @@ const App: React.FC = () => {
       <AuthContainer>
         <Dropdown />
         <Chart />
-        <GetData />
       </AuthContainer>
     </div>
   );
