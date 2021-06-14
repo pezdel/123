@@ -1,5 +1,5 @@
 import React from "react";
-
+//test
 export const scale = async (plot, scale, high) => {
   var spaceTop = scale / 100, //update cavans h/w and clear rect h/w (draw())
     spaceBot = 5;
