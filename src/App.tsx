@@ -3,10 +3,9 @@ import { AuthContainer } from "./ts/AuthContainer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Chart } from "./ts/Chart";
 import { Dropdown } from "./ts/dropdown";
-import { GetData } from './ts/GetData'
+import { GetData } from "./ts/GetData";
 
 const App: React.FC = () => {
-  
   return (
     <div className="chart-main">
       <AuthContainer>
@@ -18,8 +17,6 @@ const App: React.FC = () => {
   );
 };
 export default App;
-
-
 
 //onEffects
 //onLoad-----------done

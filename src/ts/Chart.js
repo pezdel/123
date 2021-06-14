@@ -38,7 +38,6 @@ export const Chart = () => {
         onMouseUp={finishDrawing}
         onMouseMove={draw}
       ></canvas>
-      
     </div>
-  );
+      );
 };
