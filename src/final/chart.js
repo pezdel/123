@@ -10,18 +10,14 @@ export const Chart = () => {
   const { data } = useContext(AuthContext);
   const [divWidth, setDivWidth] = useState(500);
 
-  useEffect(() => {
+  useEffect(async() => {
     if (data.length !== 0) {
       setDivWidth(data.length * 4);
-      getData();
+      const [high, low, diff] = await findHighLow(data);
+      const scaledData = await scale(data, high, diff);
+      draw(await scaledData, divWidth)
     }
   }, [data]);
-  
-  const getData = async() => {
-    const [high, low, diff] = await findHighLow(data);
-    const scaledData = await scale(data, high, diff);
-    //draw(await scaledData)
-  };
 
   return (
     <div>

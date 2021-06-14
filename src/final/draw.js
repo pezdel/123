@@ -1,19 +1,11 @@
-export const draw = (plot) =>{
-
-	console.log("klsjdf")
-}
-export function drawNOPE(plot) {
-  const can = document.getElementById("can"),
+export const draw = (data, length) =>{
+ const can = document.getElementById("main"),
     ctx = can.getContext("2d");
-  const ctxTemp_height = can.height,
-    ctxTemp_width = can.width;
-  ctx.clearRect(0, 0, 700, 500);
-  let x = 10;
-  // ctx.beginPath()
-  // ctx.moveTo(0,0)
-  // ctx.lineTo(300,150)
-  // ctx.stroke()
-  plot.forEach((el) => {
+    
+  ctx.clearRect(0, 0, length, 500);
+	let x = 10;
+
+  data.forEach((el) => {
     if (el.open > el.close) {
       ctx.strokeStyle = "green";
     } else {
@@ -33,10 +25,22 @@ export function drawNOPE(plot) {
     ctx.stroke()
     x+=4
   });
+ 
+   
   
-  return (
-    <div>
-    </div>
-  );
+  console.log("klsjdf")
 }
+// export function drawNOPE(plot) {
+ 
+//   let x = 10;
+//   // ctx.beginPath()
+//   // ctx.moveTo(0,0)
+//   // ctx.lineTo(300,150)
+//   // ctx.stroke()
+ 
+//   return (
+//     <div>
+//     </div>
+//   );
+// }
 
