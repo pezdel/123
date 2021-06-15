@@ -10,7 +10,7 @@
   width:200px;
 
 }
-
+/* 
 .chart-main{
   position: relative;
 }
@@ -28,26 +28,48 @@
   position:relative;
   width:700px;
   height:500px;
-}
-#can-date{
-  position:absolute; top:0px; left:0px;
-  width:700px;
-  height:500px;
-  pointer-events: none;
-}
-#zoom{
-   border:1px black solid;
-   box-shadow: 5px 5px 10px #1e1e1e;  
-   position:absolute; 
-   top:0; 
-   left:0;
-   display:none;
-}
+} */
+
 .chartWrapper{
-  overflow-x: scroll;
-  width: 500px
-}
-.chartAreaWrapper{
   position: relative;
   
 }
+
+.chartAreaWrapper{
+  overflow-x:scroll;
+  width:500px;
+  position: absolute;
+  top:50px;
+  background-color: bisque; 
+}
+#main{
+  
+}
+.zoomWrapper{
+  position:absolute;
+  left: 500px;
+  top: 100px;
+  background-color: coral;
+}
+
+#zoom{
+   border:1px black solid;
+   box-shadow: 6px 5px 10px #4e0d0d;  
+   position:absolute; 
+   
+
+     /* left:50%; */
+   /* display:none; */
+}
+/* .testWrapper{
+  position: relative;
+}
+.testText{
+  position:absolute;
+  top:00px;
+ 
+}
+#testCan{
+  position:absolute;
+  top:100px;
+} */

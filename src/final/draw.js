@@ -1,7 +1,29 @@
+const getCanvas = ()=>{
+const can = document.getElementById("main"),
+  ctx = can.getContext("2d"),
+  zoom = document.getElementById('zoom'),
+  zoomCtx = zoom.getContext('2d');
+}
+
+export const magnify = () =>{
+  const can = document.getElementById("main"),
+  ctx = can.getContext("2d"),
+  zoom = document.getElementById('zoom'),
+  zoomCtx = zoom.getContext('2d');
+
+  zoomCtx.fillRect(0,0, zoom.width, zoom.height)
+  zoomCtx.drawImage(can, 5, 0, 405, 400, 0, 0, 400, 200)
+  //zoom.style.top = 0 + 10 + "px"
+  //zoom.style.left = 0 + 10 + "px"
+  zoom.style.display = "block";  
+} 
+
 export const draw = (data, length) =>{
- const can = document.getElementById("main"),
-    ctx = can.getContext("2d");
-    
+  const can = document.getElementById("main"),
+  ctx = can.getContext("2d"),
+  zoom = document.getElementById('zoom'),
+  zoomCtx = zoom.getContext('2d');
+  
   ctx.clearRect(0, 0, length, 500);
 	let x = 10;
 
@@ -17,7 +39,6 @@ export const draw = (data, length) =>{
     ctx.lineTo(x, el.low);
     ctx.stroke();
 
-
     ctx.beginPath()
     ctx.lineWidth =3
     ctx.moveTo(x, el.open)
@@ -25,22 +46,4 @@ export const draw = (data, length) =>{
     ctx.stroke()
     x+=4
   });
- 
-   
-  
-  console.log("klsjdf")
 }
-// export function drawNOPE(plot) {
- 
-//   let x = 10;
-//   // ctx.beginPath()
-//   // ctx.moveTo(0,0)
-//   // ctx.lineTo(300,150)
-//   // ctx.stroke()
- 
-//   return (
-//     <div>
-//     </div>
-//   );
-// }
-
