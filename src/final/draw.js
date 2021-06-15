@@ -4,6 +4,16 @@ const can = document.getElementById("main"),
   zoom = document.getElementById('zoom'),
   zoomCtx = zoom.getContext('2d');
 }
+export const tests = (oldX)=>{
+  const can = document.getElementById("main"),
+  ctx = can.getContext("2d"),
+  zoom = document.getElementById('zoom'),
+  zoomCtx = zoom.getContext('2d');
+
+  zoomCtx.fillRect(0,0, zoom.width, zoom.height)
+  zoomCtx.drawImage(can, oldX, 0, 400, 400, 0, 0, 400, 200)
+    
+}
 
 export const magnify = () =>{
   const can = document.getElementById("main"),
@@ -12,13 +22,13 @@ export const magnify = () =>{
   zoomCtx = zoom.getContext('2d');
 
   zoomCtx.fillRect(0,0, zoom.width, zoom.height)
-  zoomCtx.drawImage(can, 5, 0, 405, 400, 0, 0, 400, 200)
+  zoomCtx.drawImage(can, 60, 0, 460, 400, 0, 0, 400, 200)
   //zoom.style.top = 0 + 10 + "px"
   //zoom.style.left = 0 + 10 + "px"
-  zoom.style.display = "block";  
+  //zoom.style.display = "block";  
 } 
 
-export const draw = (data, length) =>{
+export const draw = async(data, length) =>{
   const can = document.getElementById("main"),
   ctx = can.getContext("2d"),
   zoom = document.getElementById('zoom'),
@@ -46,4 +56,5 @@ export const draw = (data, length) =>{
     ctx.stroke()
     x+=4
   });
+  
 }
