@@ -5,12 +5,14 @@ export const magnify = async (
   start,
   windowSize,
   fullDiff,
-  fullHigh,
+  fullHigh, 
   fullLow
 ) => {
   let plot = [[]];
+  //if start > 0 and 
+  const actualStart = Math.ceil(start/4)
   const getPlot = async () => {
-    for (let i = start; i < start + windowSize; i++) {
+    for (let i = actualStart; i < actualStart + windowSize; i++) {
       plot.push(data[i]);
     }
     return plot;
@@ -19,20 +21,23 @@ export const magnify = async (
 
   let spaceTop = fullDiff / 100,
     spaceBot = 4;
-  const windowHigh =
-    (100 - (fullDiff - (fullHigh - high)) / spaceTop) * spaceBot;
-  const windowLow = 
-    (100 - (fullDiff - (fullLow - low)) / spaceTop) * spaceBot;
-
+  // const windowLow = Math.ceil(((low-fullLow)/fullDiff)*500)
+  // const windowHigh = Math.ceil(((high - fullLow)/fullDiff)*500)
+  const windowLow = Math.ceil((100 - (fullDiff - (fullHigh - low)) / spaceTop) * spaceBot)
+  const windowHigh = Math.ceil((100 - (fullDiff - (fullHigh - high)) / spaceTop) * spaceBot)
   const can = document.getElementById("main"),
     ctx = can.getContext("2d"),
     zoom = document.getElementById("zoom"),
     zoomCtx = zoom.getContext("2d");
   
-  console.log(windowLow);
+    
+    console.log("WindowHigh " +windowHigh)
+    console.log("WindowLow " +windowLow)
   zoomCtx.fillRect(0, 0, zoom.width, zoom.height);
   //zoomCtx.drawImage(can, start here, 400, here, 0,0,400, 200)
-  zoomCtx.drawImage(can, start, 0, 400, 400-windowHigh, 0, 0, 400, 200);
+  const topGap = null
+  const botGap = null
+  zoomCtx.drawImage(can, start, windowHigh, 400, (windowLow-windowHigh), 0, 0, 300, 200);
 
   //still left
   //something to figure out can height

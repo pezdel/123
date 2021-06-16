@@ -24,7 +24,8 @@ export const Chart = () => {
     setFullDiff(diff)
     const scaledData = await scale(data, fullHighRef.current, fullDiffRef.current);
     draw(await scaledData, divWidth);
-    magnify(data, (startCordRef.current)/4, windowSize, diff, fullHighRef.current, fullLowRef.current)
+    console.log(startCordRef.current)
+    magnify(data, startCordRef.current, windowSize, diff, fullHighRef.current, fullLowRef.current)
   };
 
   useEffect(async () => {
@@ -48,10 +49,13 @@ export const Chart = () => {
       return;
     }
     const { offsetX, offsetY } = nativeEvent;
-    setJump((Math.ceil(offsetX - startXRef.current))*2);
+    setJump((Math.ceil(offsetX - startXRef.current)));
     setStartCord(startCordRef.current - jumpRef.current);
-    magnify(data, (Math.ceil(startCordRef.current/4)), windowSize, fullDiffRef.current, fullHighRef.current, fullLowRef.current)
-    setStartX(offsetX);
+    if(startCordRef.current > 0 && startCordRef.current < divWidth - windowSize){
+      console.log("hey")
+      magnify(data, startCordRef.current, windowSize, fullDiff, fullHighRef.current, fullLowRef.current)
+      setStartX(offsetX);
+    }
   };
   const finishDrawing = () => {
     setIsDrawing(false);
@@ -60,12 +64,12 @@ export const Chart = () => {
   return (
     <div className="chartWrapper">
       <div className="chartAreaWrapper">
-        <canvas id="main" width={divWidth} height={500}></canvas>
+        <canvas id="main" width={divWidth} height={600}></canvas>
       </div>
       <div className="zoomWrapper">
         <canvas
           id="zoom"
-          width={"400"}
+          width={"300"}
           height={"200"}
           onMouseDown={startDrawing}
           onMouseUp={finishDrawing}
