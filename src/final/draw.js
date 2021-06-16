@@ -9,20 +9,20 @@ export const tests = (oldX)=>{
   ctx = can.getContext("2d"),
   zoom = document.getElementById('zoom'),
   zoomCtx = zoom.getContext('2d');
-
+  
   zoomCtx.fillRect(0,0, zoom.width, zoom.height)
   zoomCtx.drawImage(can, oldX, 0, 400, 400, 0, 0, 400, 200)
     
 }
 
-export const magnify = () =>{
+export const magnify = (start) =>{
   const can = document.getElementById("main"),
   ctx = can.getContext("2d"),
   zoom = document.getElementById('zoom'),
   zoomCtx = zoom.getContext('2d');
-
+  
   zoomCtx.fillRect(0,0, zoom.width, zoom.height)
-  zoomCtx.drawImage(can, 60, 0, 460, 400, 0, 0, 400, 200)
+  zoomCtx.drawImage(can, start, 0, 400, 400, 0, 0, 400, 200)
   //zoom.style.top = 0 + 10 + "px"
   //zoom.style.left = 0 + 10 + "px"
   //zoom.style.display = "block";  

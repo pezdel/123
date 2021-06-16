@@ -6,23 +6,31 @@ import { draw, magnify, tests } from './draw'
 import { findHighLow, scale } from './scale'
 
 export const Chart = () => {
+  const [divWidth, setDivWidth] = useState(500)
+  const [startCord, setStartCord, startCordRef] = useState(0)
   const { data } = useContext(AuthContext);
-  const [divWidth, setDivWidth] = useState(500);
+  const windowSize = 100;
+  const x = 4;
+
+  const renderMainChart = async() => {
+    setDivWidth(data.length * x)
+    setStartCord((data.length - windowSize)*4)
+    const [high, low, diff] = await findHighLow(data);
+    const scaledData = await scale(data, high, diff);
+    draw(await scaledData, divWidth);
+    magnify(startCordRef.current);
+  };
 
   useEffect(async () => {
     if (data.length !== 0) {
-      setDivWidth(data.length * 4);
-      const [high, low, diff] = await findHighLow(data);
-      const scaledData = await scale(data, high, diff);
-      draw(await scaledData, divWidth);
-      magnify();
+      renderMainChart()
     }
   }, [data]);
 
   const [jump, setJump, jumpRef] = useState(0);
   const [isDrawing, setIsDrawing] = useState(false);
   const [startX, setStartX, startXRef] = useState(0);
-  const [oldX, setOldX, oldXRef] = useState(0)
+  
 
   const startDrawing = ({ nativeEvent }) => {
     const { offsetX, offsetY } = nativeEvent;
@@ -34,15 +42,14 @@ export const Chart = () => {
       return;
     }
     const { offsetX, offsetY } = nativeEvent;
-    setJump(0)   
-    setJump(Math.ceil((offsetX - startXRef.current) / 12));
-
-//     setOldX(oldXRef.current-jumpRef.current)
-//     setOldY(oldYRef.current-jumpRef.current)
-    if(jumpRef !== 0){
-    setOldX(oldXRef.current- jumpRef.current)
-    tests(oldXRef.current)
-    }
+    setJump(Math.ceil(offsetX - startXRef.current));
+    setStartX(offsetX);
+    setStartCord(startCordRef.current - jumpRef.current);
+    tests(startCordRef.current);
+    //need to set window high/low
+    //figure out how to get json of data being shown
+    //
+    
   };
   const finishDrawing = () => {
     setIsDrawing(false);
