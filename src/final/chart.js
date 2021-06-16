@@ -2,13 +2,16 @@ import React, {useContext, useEffect} from 'react'
 import { AuthContext } from './AuthContainer'
 import useState from 'react-usestateref';
 
-import { draw, magnify, tests } from './draw'
+import { draw, magnify} from './draw'
 import { findHighLow, scale } from './scale'
 
 export const Chart = () => {
   const [divWidth, setDivWidth] = useState(500)
   const [startCord, setStartCord, startCordRef] = useState(0)
   const { data } = useContext(AuthContext);
+  const [ fullHigh, setFullHigh, fullHighRef] = useState(0)
+  const [ fullLow, setFullLow, fullLowRef] = useState(0)
+  const [ fullDiff, setFullDiff, fullDiffRef] = useState(0)
   const windowSize = 100;
   const x = 4;
 
@@ -16,9 +19,12 @@ export const Chart = () => {
     setDivWidth(data.length * x)
     setStartCord((data.length - windowSize)*4)
     const [high, low, diff] = await findHighLow(data);
-    const scaledData = await scale(data, high, diff);
+    setFullHigh(high)
+    setFullLow(low)
+    setFullDiff(diff)
+    const scaledData = await scale(data, fullHighRef.current, fullDiffRef.current);
     draw(await scaledData, divWidth);
-    magnify(startCordRef.current);
+    magnify(data, (startCordRef.current)/4, windowSize, diff, fullHighRef.current, fullLowRef.current)
   };
 
   useEffect(async () => {
@@ -42,14 +48,10 @@ export const Chart = () => {
       return;
     }
     const { offsetX, offsetY } = nativeEvent;
-    setJump(Math.ceil(offsetX - startXRef.current));
-    setStartX(offsetX);
+    setJump((Math.ceil(offsetX - startXRef.current))*2);
     setStartCord(startCordRef.current - jumpRef.current);
-    tests(startCordRef.current);
-    //need to set window high/low
-    //figure out how to get json of data being shown
-    //
-    
+    magnify(data, (Math.ceil(startCordRef.current/4)), windowSize, fullDiffRef.current, fullHighRef.current, fullLowRef.current)
+    setStartX(offsetX);
   };
   const finishDrawing = () => {
     setIsDrawing(false);
