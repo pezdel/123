@@ -6,7 +6,8 @@ import { draw, magnify} from './draw'
 import { findHighLow, scale } from './scale'
 
 export const Chart = () => {
-  const [divWidth, setDivWidth] = useState(500)
+  const [divWidth, setDivWidth, divWidthRef] = useState(500)
+  const [divHeight, setDivHeight] = useState(500)
   const [startCord, setStartCord, startCordRef] = useState(0)
   const { data } = useContext(AuthContext);
   const [ fullHigh, setFullHigh, fullHighRef] = useState(0)
@@ -17,6 +18,7 @@ export const Chart = () => {
 
   const renderMainChart = async() => {
     setDivWidth(data.length * x)
+    setDivHeight(divWidthRef.current/4)
     setStartCord((data.length - windowSize)*4)
     const [high, low, diff] = await findHighLow(data);
     setFullHigh(high)
@@ -24,7 +26,6 @@ export const Chart = () => {
     setFullDiff(diff)
     const scaledData = await scale(data, fullHighRef.current, fullDiffRef.current);
     draw(await scaledData, divWidth);
-    console.log(startCordRef.current)
     magnify(data, startCordRef.current, windowSize, diff, fullHighRef.current, fullLowRef.current)
   };
 
@@ -50,9 +51,11 @@ export const Chart = () => {
     }
     const { offsetX, offsetY } = nativeEvent;
     setJump((Math.ceil(offsetX - startXRef.current)));
-    setStartCord(startCordRef.current - jumpRef.current);
-    if(startCordRef.current > 0 && startCordRef.current < divWidth - windowSize){
-      console.log("hey")
+    
+    if(startCordRef.current-jumpRef.current > 0 && 
+        startCordRef.current-jumpRef.current < divWidth-windowSize*4){
+          
+      setStartCord(startCordRef.current - jumpRef.current);
       magnify(data, startCordRef.current, windowSize, fullDiff, fullHighRef.current, fullLowRef.current)
       setStartX(offsetX);
     }
@@ -64,7 +67,8 @@ export const Chart = () => {
   return (
     <div className="chartWrapper">
       <div className="chartAreaWrapper">
-        <canvas id="main" width={divWidth} height={600}></canvas>
+        <h1>{divHeight}</h1>
+        <canvas id="main" width={divWidth} height={divHeight}></canvas>
       </div>
       <div className="zoomWrapper">
         <canvas
