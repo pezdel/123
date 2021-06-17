@@ -6,7 +6,9 @@ export const magnify = async (
   windowSize,
   fullDiff,
   fullHigh, 
-  fullLow
+  x,
+  zoomHeight,
+  zoomWidth
 ) => {
   
   let plot = [[]];
@@ -29,7 +31,7 @@ export const magnify = async (
     zoom = document.getElementById("zoom"),
     zoomCtx = zoom.getContext("2d");
   zoomCtx.fillRect(0, 0, zoom.width, zoom.height);
-  zoomCtx.drawImage(can, start, windowHigh, 400, (windowLow-windowHigh), 0, 0, 300, 200);
+  zoomCtx.drawImage(can, start, windowHigh, windowSize*x, (windowLow-windowHigh), 0, 0, zoomWidth, zoomHeight);
 
   //something to figure out can height
  

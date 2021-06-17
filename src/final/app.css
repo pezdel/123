@@ -36,8 +36,11 @@
 }
 
 .chartAreaWrapper{
+  /* display:none; */
   overflow-x:scroll;
+  overflow-y:scroll;
   width:500px;
+  height:500px;
   position: absolute;
   top:50px;
   background-color: bisque; 
@@ -47,7 +50,7 @@
 }
 .zoomWrapper{
   position:absolute;
-  left: 600px;
+  left: 100px;
   top: 100px;
   background-color: coral;
 }

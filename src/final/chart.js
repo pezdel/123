@@ -13,12 +13,13 @@ export const Chart = () => {
   const [ fullHigh, setFullHigh, fullHighRef] = useState(0)
   const [ fullLow, setFullLow, fullLowRef] = useState(0)
   const [ fullDiff, setFullDiff, fullDiffRef] = useState(0)
-  const windowSize = 100;
+  const zoomHeight = 700
+  const zoomWidth = 1200
+  const windowSize = Math.ceil(zoomWidth/3);
   const x = 4;
 
   const renderMainChart = async() => {
-    setDivWidth(data.length * x)
-    setDivHeight(divWidthRef.current/4)
+    setDivWidth(data.length * x)    
     setStartCord((data.length - windowSize)*4)
     const [high, low, diff] = await findHighLow(data);
     setFullHigh(high)
@@ -26,7 +27,7 @@ export const Chart = () => {
     setFullDiff(diff)
     const scaledData = await scale(data, fullHighRef.current, fullDiffRef.current);
     draw(await scaledData, divWidth);
-    magnify(data, startCordRef.current, windowSize, diff, fullHighRef.current, fullLowRef.current)
+    magnify(data, startCordRef.current, windowSize, diff, fullHighRef.current, x, zoomHeight, zoomWidth)
   };
 
   useEffect(async () => {
@@ -54,9 +55,9 @@ export const Chart = () => {
     
     if(startCordRef.current-jumpRef.current > 0 && 
         startCordRef.current-jumpRef.current < divWidth-windowSize*4){
-          
+
       setStartCord(startCordRef.current - jumpRef.current);
-      magnify(data, startCordRef.current, windowSize, fullDiff, fullHighRef.current, fullLowRef.current)
+      magnify(data, startCordRef.current, windowSize, fullDiff, fullHighRef.current, x, zoomHeight, zoomWidth)
       setStartX(offsetX);
     }
   };
@@ -67,14 +68,14 @@ export const Chart = () => {
   return (
     <div className="chartWrapper">
       <div className="chartAreaWrapper">
-        <h1>{divHeight}</h1>
+        <h1 className="test">asdf</h1>
         <canvas id="main" width={divWidth} height={divHeight}></canvas>
       </div>
       <div className="zoomWrapper">
         <canvas
           id="zoom"
-          width={"300"}
-          height={"200"}
+          width={zoomWidth}
+          height={zoomHeight}
           onMouseDown={startDrawing}
           onMouseUp={finishDrawing}
           onMouseMove={isDraw}
@@ -83,3 +84,14 @@ export const Chart = () => {
     </div>
   );
 };
+
+//so width should be set based on data length
+//height should be based on width? or maybe static?
+// prob just static but upstream it
+
+//something for magnify also.
+//should be static width that covers the non-overflowed part of main
+//height should be static but upstream it
+
+//so if hieght changes, it needs to update the main page scale page
+//also needs to update a field on the magnify part
