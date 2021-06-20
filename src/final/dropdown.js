@@ -2,7 +2,7 @@ import React, { useState, useContext, useEffect } from 'react';
 import { AuthContext } from "./AuthContainer";
 import Select from 'react-select';
 import './app.css'
-
+//test
 const currency = [
   { value: 'EURUSD', label: 'EURUSD' },
   { value: 'AUDUSD', label: 'AUDUSD' },

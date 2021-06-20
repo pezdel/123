@@ -49,6 +49,7 @@
   
 }
 .zoomWrapper{
+  display:none;
   position:absolute;
   left: 100px;
   top: 100px;
@@ -56,10 +57,10 @@
 }
 
 #zoom{
-   border:1px black solid;
+   border:1px rgb(136, 128, 128) solid;
    box-shadow: 6px 5px 10px #4e0d0d;  
    position:absolute; 
-   
+  
 
      /* left:50%; */
    /* display:none; */

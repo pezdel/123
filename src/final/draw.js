@@ -1,5 +1,5 @@
 import { findHighLow } from './scale'
-
+//hey
 export const magnify = async (
   data,
   start,
@@ -38,14 +38,14 @@ export const magnify = async (
   //boundries.
 };
 
-export const draw = async (data, length) => {
+export const draw = async (data, length, height) => {
   const can = document.getElementById("main"),
     ctx = can.getContext("2d"),
     zoom = document.getElementById("zoom"),
     zoomCtx = zoom.getContext("2d");
 
-   
-  ctx.clearRect(0, 0, length, 500);
+             
+  ctx.clearRect(0, 0, length, height);
   let x = 10;
 
   data.forEach((el) => {
