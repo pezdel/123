@@ -1,24 +1,31 @@
 import { Decimal } from 'decimal.js'
- 
-const addPrice=async(high, low, split, ctx, ctxTemp_height, ctxTemp_width)=>{
-    let diffSpace = new Decimal((high-low)/split)
-    let roundedDiffSpace;
 
-    const test = async() =>{
-    if(diffSpace<1){
+
+const starterMarker = (high, roundedDiffSpace) => {
+    //count down from high and find first time it matches the roundedDiffSpace thing 
+    console.log(roundedDiffSpace)
+
+}
+
+const roundedSpace = async(diffSpace) =>{
+    let roundedDiffSpace;
+    console.log("HEY")
+    console.log(diffSpace)
+    if(diffSpace.toNumber()<1){
         const p = Math.abs(Math.floor(Math.log10(diffSpace)))
-        roundedDiffSpace = (diffSpace.toDP(p-1)).toNumber()
-        return roundedDiffSpace 
+        roundedDiffSpace = ((diffSpace.toDP(p)).toNumber())
+        return roundedDiffSpace
     } else{
         const p = Math.abs(Math.floor(Math.log10(diffSpace)))
-        roundedDiffSpace = (diffSpace.toDP(p+1)).toNumber()
+        roundedDiffSpace = ((diffSpace.toDP(p+1)).toNumber())
         return roundedDiffSpace
-    }}
-    //need a function that can find the starter marker
-    //we are starting at top or bot idk
-    //with the high/low it needs to find the first spot that kinda matches the marker
-    console.log(high)
-    console.log(await test)
+    }
+}
+const addPrice=async(high, low, split, ctx, ctxTemp_height, ctxTemp_width) => {
+    let diffSpace = new Decimal((high-low)/split)
+    const rds = roundedSpace(diffSpace)
+    starterMarker(high, await rds)
+    
     let x = 0
     const jump = ctxTemp_height/split
     for(let i=0; i<split; i++){
@@ -28,7 +35,7 @@ const addPrice=async(high, low, split, ctx, ctxTemp_height, ctxTemp_width)=>{
         ctx.lineTo(ctxTemp_width, x)
         ctx.strokeStyle = "blue"
         ctx.stroke()
-     
+
         ctx.font = '19px Arial'
         ctx.textAlign = 'start'
         ctx.fillStyle = 'blue'
@@ -42,7 +49,7 @@ const getDate = (date) => {
     let Year = df.getFullYear(),
         Month = df.getMonth()+1,
         Day = df.getDate()
-        //getDate = getDay + " " + getMonth + " " + getYear;
+    //getDate = getDay + " " + getMonth + " " + getYear;
     return {Year, Month, Day}
 }
 
