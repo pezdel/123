@@ -1,4 +1,42 @@
 import { Decimal } from 'decimal.js'
+ 
+const addPrice=async(high, low, split, ctx, ctxTemp_height, ctxTemp_width)=>{
+    let diffSpace = new Decimal((high-low)/split)
+    let roundedDiffSpace;
+
+    const test = async() =>{
+    if(diffSpace<1){
+        const p = Math.abs(Math.floor(Math.log10(diffSpace)))
+        roundedDiffSpace = (diffSpace.toDP(p-1)).toNumber()
+        return roundedDiffSpace 
+    } else{
+        const p = Math.abs(Math.floor(Math.log10(diffSpace)))
+        roundedDiffSpace = (diffSpace.toDP(p+1)).toNumber()
+        return roundedDiffSpace
+    }}
+    //need a function that can find the starter marker
+    //we are starting at top or bot idk
+    //with the high/low it needs to find the first spot that kinda matches the marker
+    console.log(high)
+    console.log(await test)
+    let x = 0
+    const jump = ctxTemp_height/split
+    for(let i=0; i<split; i++){
+        ctx.beginPath()
+        ctx.lineWidth=1
+        ctx.moveTo(0, x)
+        ctx.lineTo(ctxTemp_width, x)
+        ctx.strokeStyle = "blue"
+        ctx.stroke()
+     
+        ctx.font = '19px Arial'
+        ctx.textAlign = 'start'
+        ctx.fillStyle = 'blue'
+        ctx.fillText(i, ctxTemp_width-25, x)
+        x+=jump
+    }
+}
+
 const getDate = (date) => {
     let df = new Date(date * 1000)
     let Year = df.getFullYear(),
@@ -18,45 +56,14 @@ const addAxis = (date, x, ctx, ctxTemp_height, ctxTemp_width) => {
     //date
     ctx.font = '12px Arial'
     ctx.textAlign = 'start'
-    ctx.fillStyle = 'White'
+    ctx.fillStyle = 'red'
     ctx.fillText(date, x, (ctxTemp_height-100))
-}
- 
-const addPrice=(high, low, split, ctx, ctxTemp_height, ctxTemp_width)=>{
-    let diffSpace = new Decimal((high-low)/split)
-    // console.log(diffSpace.toNumber())
-
-    if(diffSpace<1){
-        const p = Math.abs(Math.floor(Math.log10(diffSpace)))
-        const roundedDiffSpace = (diffSpace.toDP(p-1)).toNumber()
-        console.log(roundedDiffSpace)
-    } else{
-        const p = Math.abs(Math.floor(Math.log10(diffSpace)))
-        const roundedDiffSpace = (diffSpace.toDP(p+1)).toNumber()
-        console.log(roundedDiffSpace)
-    }
-
-    let x = 0
-    for(let i=0; i<split; i++){
-        ctx.beginPath()
-        ctx.lineWidth=1
-        ctx.moveTo(0, x)
-        ctx.lineTo(ctxTemp_width, x)
-        ctx.strokeStyle = "red"
-        ctx.stroke()
-     
-        ctx.font = '19px Arial'
-        ctx.textAlign = 'start'
-        ctx.fillStyle = 'White'
-        ctx.fillText(i, ctxTemp_width-100, x)
-        x+=4
-    }
 }
 
 export const drawAxis = async(data, tf, high, low)=>{
     const can = document.getElementById("main"),
-        ctx = can.getContext("2d");
-    const ctxTemp_height = can.height,
+        ctx = can.getContext("2d"),
+        ctxTemp_height = can.height,
         ctxTemp_width = can.width;
     let x=10;
     let compare = getDate(data[0].date)

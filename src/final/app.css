@@ -36,7 +36,7 @@
 }
 
 .chartAreaWrapper{
-  display:none; 
+  /* display:none; */ 
   overflow-x:scroll;
   overflow-y:scroll;
   width:500px;
@@ -62,7 +62,7 @@
 }
 
 #zoom{
-   /* display:none; */
+   display:none;
    border:1px rgb(136, 128, 128) solid;
    box-shadow: 6px 5px 10px #4e0d0d;  
    position:absolute; 

@@ -10,21 +10,35 @@ export const findHighLow = async (data) => {
 };
 
 
-export const scale = (plot, high, diff) => {
-  let spaceTop = diff / 90,
-    spaceBot = 3;
+export const scale = (plot, high, diff, height) => {
+    console.log(height)
   plot = plot.map((el) => {
     return {
-      low: (100 - (diff - (high - el.low)) / spaceTop) * spaceBot,
-      high: (100 - (diff - (high - el.high)) / spaceTop) * spaceBot,
-      open: (100 - (diff - (high - el.open)) / spaceTop) * spaceBot,
-      close: (100 - (diff - (high - el.close)) / spaceTop) * spaceBot,
+      low: ((high - el.low) / diff) * height,
+      high: ((high - el.high) / diff) * height,
+      open: ((high - el.open) / diff) * height,
+      close: ((high - el.close) / diff) * height,
       date: el.date,
     };
   });
   return plot;
 };
-//things left on chart
+
+//export const scale = (plot, high, diff) => {
+//  let spaceTop = diff / 100,
+//    spaceBot = 10;
+//  plot = plot.map((el) => {
+//    return {
+//      low: (100 - (diff - (high - el.low)) / spaceTop) * spaceBot,
+//      high: (100 - (diff - (high - el.high)) / spaceTop) * spaceBot,
+//      open: (100 - (diff - (high - el.open)) / spaceTop) * spaceBot,
+//      close: (100 - (diff - (high - el.close)) / spaceTop) * spaceBot,
+//      date: el.date,
+//    };
+//  });
+//  return plot;
+//};
+////things left on chart
 //---scale with window size
 //---price/dates
 //---orginize it

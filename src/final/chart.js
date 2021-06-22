@@ -36,7 +36,8 @@ export const Chart = () => {
         const scaledData = await scale(
             data,
             fullHighRef.current,
-            fullDiffRef.current
+            fullDiffRef.current,
+            divHeight
         );
         draw(await scaledData, divWidth, divHeight);
         drawAxis(data, tf, fullHighRef.current, fullLowRef.current)
@@ -121,3 +122,6 @@ export const Chart = () => {
 
 //once you have the markers from loop,
 //where do you put the draw function?
+
+
+
