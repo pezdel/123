@@ -40,7 +40,7 @@ export const Chart = () => {
             divHeight
         );
         draw(await scaledData, divWidth, divHeight);
-        drawAxis(data, tf, fullHighRef.current, fullLowRef.current)
+        drawAxis(data, tf, fullHighRef.current, fullLowRef.current, fullDiffRef.current)
         magnify(
             data,
             0,
