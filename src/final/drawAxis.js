@@ -1,31 +1,46 @@
 import { Decimal } from 'decimal.js'
 
 
-const starterMarker = (high, roundedDiffSpace) => {
-    //count down from high and find first time it matches the roundedDiffSpace thing 
-    console.log(roundedDiffSpace)
-
-}
-
-const roundedSpace = async(diffSpace) =>{
-    let roundedDiffSpace;
-    console.log("HEY")
-    console.log(diffSpace)
+const roundedSpace = async (diffSpace, high) => {
+    let rds;
+    let startSpot;
+    const testHigh = new Decimal(high);
+    
     if(diffSpace.toNumber()<1){
         const p = Math.abs(Math.floor(Math.log10(diffSpace)))
-        roundedDiffSpace = ((diffSpace.toDP(p)).toNumber())
-        return roundedDiffSpace
+        rds = ((diffSpace.toDP(p)).toNumber())
+        return [rds, startSpot]
     } else{
         const p = Math.abs(Math.floor(Math.log10(diffSpace)))
-        roundedDiffSpace = ((diffSpace.toDP(p+1)).toNumber())
-        return roundedDiffSpace
+        //p finds from the (high-low/split) how many places you can drop off
+        let varP;
+        switch(p){
+            case 0:
+                varP = 1 
+                break;
+            case 1:
+                varP = 10
+                break;
+            case 2:
+                varP = 100
+                break;
+            case 3:
+                varP = 1000
+                break;
+            case 4:
+                varP = 10000
+                break;
+        }
+        rds = ((Math.round(diffSpace/varP)*varP))
+        startSpot = ((Math.round(high/varP)*varP)) 
+
+        return [rds, startSpot]
     }
 }
 const addPrice=async(high, low, split, ctx, ctxTemp_height, ctxTemp_width) => {
-    let diffSpace = new Decimal((high-low)/split)
-    const rds = roundedSpace(diffSpace)
-    starterMarker(high, await rds)
-    
+    let diffSpace = new Decimal((high, low)/split)
+    const [rds, startSpot] = await roundedSpace(diffSpace, high)
+
     let x = 0
     const jump = ctxTemp_height/split
     for(let i=0; i<split; i++){
@@ -43,6 +58,9 @@ const addPrice=async(high, low, split, ctx, ctxTemp_height, ctxTemp_width) => {
         x+=jump
     }
 }
+
+
+
 
 const getDate = (date) => {
     let df = new Date(date * 1000)
