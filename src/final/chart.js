@@ -39,9 +39,10 @@ export const Chart = () => {
             fullDiffRef.current
         );
         draw(await scaledData, divWidth, divHeight);
+        drawAxis(data, tf, fullHighRef.current, fullLowRef.current)
         magnify(
             data,
-            startCordRef.current,
+            0,
             windowSize,
             diff,
             fullHighRef.current,
@@ -49,13 +50,11 @@ export const Chart = () => {
             zoomHeight,
             zoomWidth
         );
-        drawAxis(data, tf)
     };
 
     useEffect(async () => {
         if (data.length !== 0) {
             renderMainChart();
-            console.log(tf);
         }
     }, [data]);
 
@@ -101,17 +100,19 @@ export const Chart = () => {
         <div className="chartWrapper">
         <div className="chartAreaWrapper">
         <h1 className="test">asdf</h1>
-        <canvas id="main" width={divWidth} height={divHeight}></canvas>
+            <canvas id="main" width={divWidth} height={divHeight}></canvas>
         </div>
         <div className="zoomWrapper">
         <canvas
-        id="zoom"
-        width={zoomWidth}
-        height={zoomHeight}
-        onMouseDown={startDrawing}
-        onMouseUp={finishDrawing}
-        onMouseMove={isDraw}
+            id="zoom"
+            width={zoomWidth}
+            height={zoomHeight}
+            onMouseDown={startDrawing}
+            onMouseUp={finishDrawing}
+            onMouseMove={isDraw}
         ></canvas>
+            <canvas id="date" width={zoomWidth} height={200}></canvas>
+            <canvas id="price" width={200} height={zoomHeight}></canvas>
         </div>
         </div>
         

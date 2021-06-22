@@ -1,7 +1,7 @@
 .dropdown-menu {
       height: 150px;
-      overflow-y: scroll;
-    }
+  overflow-y: scroll;
+}
 .dropdown-currency{
   display: flex;
   width:400px;
@@ -36,7 +36,7 @@
 }
 
 .chartAreaWrapper{
-  /* display:none; */
+  display:none; 
   overflow-x:scroll;
   overflow-y:scroll;
   width:500px;
@@ -48,15 +48,21 @@
 #main{
   
 }
+#price{
+    /* display:none; */
+}
+#date{
+    /* display:none; */
+}
 .zoomWrapper{
-  display:none;
+ /* display:none; */
   position:absolute;
   left: 100px;
   top: 100px;
-  background-color: coral;
 }
 
 #zoom{
+   /* display:none; */
    border:1px rgb(136, 128, 128) solid;
    box-shadow: 6px 5px 10px #4e0d0d;  
    position:absolute; 
