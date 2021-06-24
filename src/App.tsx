@@ -3,6 +3,7 @@ import { AuthContainer } from "./final/AuthContainer";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown } from "./final/dropdown";
 import { Chart } from "./final/chart";
+import { Snipit } from './final/snipit';
 
 const App: React.FC = () => {
   return (
@@ -10,6 +11,7 @@ const App: React.FC = () => {
       <AuthContainer>
         <Dropdown />
         <Chart />
+        <Snipit />
       </AuthContainer>
     </div>
   );
