@@ -2,7 +2,6 @@ import React, { useContext, useEffect } from "react";
 import { AuthContext } from "./AuthContainer";
 import useState from "react-usestateref";
 
-import { findHighLow } from "./utils/utils";
 import { Main } from './chartDivs/main';
 // import { Magnify } from './chartDivs/magnify';
 // import { Price } from './chartDivs/price';
@@ -13,15 +12,10 @@ export const Chart = () => {
     const { data } = useContext(AuthContext);
     const { setMainDivWidth } = useContext(AuthContext); 
 
-    const { setMainHigh } = useContext(AuthContext);
-    const { setMainLow } = useContext(AuthContext);
-    const { setMainDiff } = useContext(AuthContext);
-
     const { windowSize } = useContext(AuthContext)
     const { startX } = useContext(AuthContext)
     const { setMagnify } = useContext(AuthContext)
-//     const [dateOffset, setDateOffset] =useState(100)
-//     const [priceOffset, setPriceOffset] = useState(100)
+    const { priceOffset } = useContext(AuthContext)
 
     // const zoomHeight = 700;
     // const zoomWidth = 1200;
@@ -30,12 +24,8 @@ export const Chart = () => {
 
     useEffect(async () => {
         if (data.length !== 0) {
-            setMainDivWidth(data.length * startX);
+            setMainDivWidth((data.length * startX)+priceOffset);
             setMagnify((data.length - windowSize) * startX);
-            const [high, low, diff] = await findHighLow(data)
-            setMainHigh(high)
-            setMainLow(low)
-            setMainDiff(diff)
         }
     }, [data]);
 

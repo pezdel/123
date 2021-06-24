@@ -9,8 +9,8 @@ export const findHighLow = async (data) => {
     return [high, low, diff];
 };
 
-export const scale = (plot, high, diff, height) => {
-  plot = plot.map((el) => {
+export const scale = (data, high, diff, height) => {
+  const plot = data.map((el) => {
     return {
       low: ((high - el.low) / diff) * height,
       high: ((high - el.high) / diff) * height,

@@ -4,7 +4,8 @@ export const draw = (data, high, low, diff, split, height, width, tf, dateOffset
     const can = document.getElementById("main"),
         ctx = can.getContext("2d"),
         ctx_Date_Pos = height-dateOffset, 
-        ctx_Price_Pos = width-priceOffset;
+        ctx_Price_Pos = width-priceOffset/2;
+        console.log(width)
 
     const drawMain = async () => {
         let x = 10;
@@ -60,14 +61,13 @@ export const draw = (data, high, low, diff, split, height, width, tf, dateOffset
     const drawDateAxis = async()=>{
         let x = 10;
         let compare = getDate(data[0].date)
-
         switch(tf){
             case '1h':
                 data.forEach((el)=>{
                     let date= getDate(el.date)
                     if(date.Day != compare.Day){
                         compare.Day = date.Day;
-                        addDate(date.Day, x, ctx, height, ctx_Date_Pos)
+                        addDate(date.Day, x, ctx, height , ctx_Date_Pos)
                     }x+=4
                 })
             case '1d':
@@ -107,5 +107,5 @@ const addDate = (time, x, ctx, height, ctx_Date_Pos) => {
     ctx.font = '12px Arial'
     ctx.textAlign = 'start'
     ctx.fillStyle = 'red'
-    ctx.fillText(time, x, (ctx_Date_Pos))
+    ctx.fillText(time, x, (height))
 }

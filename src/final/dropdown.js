@@ -24,6 +24,7 @@ export function Dropdown() {
           const rawResponse = await fetch('/onClick');
           const content = await rawResponse.json();
           setData(await content.result)
+          setTF("1d")
         }
       }
 
