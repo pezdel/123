@@ -4,6 +4,7 @@ import useState from "react-usestateref";
 export const AuthContainer = (props) => {
     const [data, setData] = useState([]);
     const [tf, setTF, tfRef] = useState('1h');
+
     const [mainHigh, setMainHigh, mainHighRef ] = useState(0);
     const [mainLow, setMainLow, mainLowRef ] = useState(0);
     const [mainDiff, setMainDiff, mainDiffRef ] = useState(0);
@@ -16,6 +17,7 @@ export const AuthContainer = (props) => {
     
     const [ dateOffset ] = useState(15);
     const [ priceOffset ] = useState(100);
+    const [ mainCtx, setMainCtx ] = useState(null)
 
     const value = {
         data,
@@ -43,8 +45,8 @@ export const AuthContainer = (props) => {
         mainDiffRef,
         dateOffset,
         priceOffset,
-
-
+        mainCtx,
+        setMainCtx,
     };
 
 

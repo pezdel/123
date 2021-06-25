@@ -1,11 +1,8 @@
 import { getDate, roundedSpace, getP } from './utils';
 
-export const draw = (data, high, low, diff, split, height, width, tf, dateOffset, priceOffset) => {
-    const can = document.getElementById("main"),
-        ctx = can.getContext("2d"),
-        ctx_Date_Pos = height-dateOffset, 
+export const draw = (data, high, low, diff, split, height, width, tf, dateOffset, priceOffset, ctx) => {
+    const ctx_Date_Pos = height-dateOffset, 
         ctx_Price_Pos = width-priceOffset/2;
-        console.log(width)
 
     const drawMain = async () => {
         let x = 10;
@@ -32,7 +29,6 @@ export const draw = (data, high, low, diff, split, height, width, tf, dateOffset
         });
     }
 
-
     const drawPriceAxis=async() => {
         let diffSpace =(high - low)/split
         let [rds, xPrice] = await roundedSpace(diffSpace, high)
@@ -56,7 +52,6 @@ export const draw = (data, high, low, diff, split, height, width, tf, dateOffset
             xPrice -= rds
         }
     }
-
 
     const drawDateAxis = async()=>{
         let x = 10;
@@ -89,8 +84,6 @@ export const draw = (data, high, low, diff, split, height, width, tf, dateOffset
         }
         return (<div></div>)
     }
-
-
     drawMain()
     drawPriceAxis()
     drawDateAxis()

@@ -1,3 +1,4 @@
+
 export const findHighLow = async (data) => {
     let high = 0, 
     	low;
@@ -66,3 +67,13 @@ export const roundedSpace = async (diffSpace, high) => {
         return [rds, startSpot]
     }
 }
+
+// const getPlot = async () => {
+//     let plot = [[]];
+//     for (let i = actualStart; i < actualStart + windowSize; i++) {
+//         plot.push(data[i]);
+//     }
+//     return plot;
+// };
+
+
