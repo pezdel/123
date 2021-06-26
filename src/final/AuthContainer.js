@@ -19,6 +19,8 @@ export const AuthContainer = (props) => {
     const [ mainCtx, setMainCtx ] = useState(null)
     const [ mainReady, setMainReady ] = useState(false)
     // const [ windowSize ] = useState(150)
+    const [ magnifyHigh, setMagnifyHigh ] = useState(0);
+    const [ magnifyLow, setMagnifyLow ] = useState(0);
 
 
     const value = {
@@ -52,6 +54,10 @@ export const AuthContainer = (props) => {
         setMagnifyStart,
         magnifyStartRef,
         // windowSize,
+        magnifyHigh,
+        setMagnifyHigh,
+        magnifyLow,
+        setMagnifyLow,
     };
 
 

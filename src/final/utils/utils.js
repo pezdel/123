@@ -1,30 +1,29 @@
 
-const getPlot = async (data, start) => {
-    let plot = [[]];
-    for (let i = start; i < start + windowSize; i++) {
-        plot.push(data[i]);
+export const windowHighLowPx = async (data, start, windowSize, mainHigh, mainDiff) => {
+
+    const getPlot = async () => {
+        let plot = [[]];
+        for (let i = start; i < start + windowSize; i++) {
+            plot.push(data[i]);
+        }
+        return plot;
+    };
+
+    const getMagHighLow= (magLow, magHigh) => {
+        let spaceTop = mainDiff / 100,
+            spaceBot = 4;
+        const windowLow = Math.ceil((100 - (mainDiff- (mainHigh- magLow)) / spaceTop) * spaceBot)
+        const windowHigh = Math.ceil((100 - (mainDiff- (mainHigh- magHigh)) / spaceTop) * spaceBot)
+
+        return [windowLow, windowHigh]
     }
-    return plot;
-};
-
-const magHighLow = (mainDiff, mainHigh, magLow, magHigh) => {
-    let spaceTop = fullDiff / 100,
-        spaceBot = 4;
-    const windowLow = Math.ceil((100 - (mainDiff- (mainHigh- magLow)) / spaceTop) * spaceBot)
-    const windowHigh = Math.ceil((100 - (mainDiff- (mainHigh- magHigh)) / spaceTop) * spaceBot)
-
-    return [windowLow, windowHigh]
-}
-// const plot = await getPlot(data)
-//         const [magHigh, magLow ] = findHighLow(await plot);
-//         magHighLow(mainDiff, mainHigh, await magLow, await magHigh)
-
-export const magHighLow = async (data, start, windowSize) => {
-    const plot = await getPlot(data)
-    const [magHigh, magLow, magDiff ] = findHighLow(await plot);
 
 
-    return [magHigh, magLow]
+    const plot = getPlot()
+    const [magHigh, magLow, magDiff ] = await findHighLow(await plot);
+    const [magnifyHigh, magnifyLow] = await getMagHighLow(await magLow, await magHigh)
+
+    return [magnifyHigh, magnifyLow]
 }
 
 

@@ -2,9 +2,9 @@ import { getDate, roundedSpace, getP } from './utils';
 import { scale, findHighLow } from './utils';
 
 
-export const draw = async (data, height, width, tf, dateOffset, priceOffset, ctx) => {
+export const draw = async (data, height, width, tf, dateOffset, priceOffset, ctx, high, low, diff) => {
     const split = 10;
-    const [high, low, diff] = await findHighLow(data)
+    // const [high, low, diff] = await findHighLow(data)
     const scaled = await scale(data, high, diff, height-dateOffset)
 
     const ctx_Date_Pos = height-dateOffset, 
