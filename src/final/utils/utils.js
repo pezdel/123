@@ -1,26 +1,64 @@
 
+const getPlot = async (data, start) => {
+    let plot = [[]];
+    for (let i = start; i < start + windowSize; i++) {
+        plot.push(data[i]);
+    }
+    return plot;
+};
+
+const magHighLow = (mainDiff, mainHigh, magLow, magHigh) => {
+    let spaceTop = fullDiff / 100,
+        spaceBot = 4;
+    const windowLow = Math.ceil((100 - (mainDiff- (mainHigh- magLow)) / spaceTop) * spaceBot)
+    const windowHigh = Math.ceil((100 - (mainDiff- (mainHigh- magHigh)) / spaceTop) * spaceBot)
+
+    return [windowLow, windowHigh]
+}
+// const plot = await getPlot(data)
+//         const [magHigh, magLow ] = findHighLow(await plot);
+//         magHighLow(mainDiff, mainHigh, await magLow, await magHigh)
+
+export const magHighLow = async (data, start, windowSize) => {
+    const plot = await getPlot(data)
+    const [magHigh, magLow, magDiff ] = findHighLow(await plot);
+
+
+    return [magHigh, magLow]
+}
+
+
+
+
+
+
+
+
+
+
+
 export const findHighLow = async (data) => {
     let high = 0, 
-    	low;
+        low;
     data.forEach((el) => {
-      high = el.high > high ? el.high : high;
-      low = !low || el.low < low ? el.low : low;
+        high = el.high > high ? el.high : high;
+        low = !low || el.low < low ? el.low : low;
     });
     const diff = high-low
     return [high, low, diff];
 };
 
 export const scale = (data, high, diff, height) => {
-  const plot = data.map((el) => {
-    return {
-      low: ((high - el.low) / diff) * height,
-      high: ((high - el.high) / diff) * height,
-      open: ((high - el.open) / diff) * height,
-      close: ((high - el.close) / diff) * height,
-      date: el.date,
-    };
-  });
-  return plot;
+    const plot = data.map((el) => {
+        return {
+            low: ((high - el.low) / diff) * height,
+            high: ((high - el.high) / diff) * height,
+            open: ((high - el.open) / diff) * height,
+            close: ((high - el.close) / diff) * height,
+            date: el.date,
+        };
+    });
+    return plot;
 };
 
 export const getDate = (date) => {
@@ -63,26 +101,9 @@ export const roundedSpace = async (diffSpace, high) => {
             varP = getP(p)
         rds = ((Math.round(diffSpace/await varP)*await varP))
         startSpot = ((Math.round(high/await varP)*await varP)) 
-        
+
         return [rds, startSpot]
     }
 }
-
-// const getPlot = async (data) => {
-//     let plot = [[]];
-//     for (let i = actualStart; i < actualStart + windowSize; i++) {
-//         plot.push(data[i]);
-//     }
-//     return plot;
-// };
-
- // const magHighLow = (mainDiff, mainHigh, magLow, magHigh) => {
- //        let spaceTop = fullDiff / 100,
- //            spaceBot = 4;
- //        const windowLow = Math.ceil((100 - (mainDiff- (mainHigh- magLow)) / spaceTop) * spaceBot)
- //        const windowHigh = Math.ceil((100 - (mainDiff- (mainHigh- magHigh)) / spaceTop) * spaceBot)
-
- //        return [windowLow, windowHigh]
- //    }
 
 

@@ -3,7 +3,7 @@ import { AuthContext } from "./AuthContainer";
 import useState from "react-usestateref";
 
 import { Main } from './chartDivs/main';
-import { Magnify } from './chartDivs/magnify';
+// import { Magnify } from './chartDivs/magnify';
 // import { Price } from './chartDivs/price';
 // import { Date } from './chartDivs/date';
 
@@ -51,13 +51,13 @@ export const Chart = () => {
     return (
         <div className="chartWrapper">
             <Main />
-            <Magnify />
         </div>
     );
 };
 
 //            <Price />
 //            <Date />
+            // <Magnify />
 
 
 

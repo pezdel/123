@@ -1,10 +1,16 @@
 import { getDate, roundedSpace, getP } from './utils';
+import { scale, findHighLow } from './utils';
 
-export const draw = (data, high, low, diff, split, height, width, tf, dateOffset, priceOffset, ctx) => {
+
+export const draw = async (data, height, width, tf, dateOffset, priceOffset, ctx) => {
+    const split = 10;
+    const [high, low, diff] = await findHighLow(data)
+    const scaled = await scale(data, high, diff, height-dateOffset)
+
     const ctx_Date_Pos = height-dateOffset, 
         ctx_Price_Pos = width-priceOffset/2;
 
-    const drawMain = async () => {
+    const drawMain = async (data) => {
         let x = 10;
         ctx.clearRect(0, 0, width, height);
 
@@ -29,7 +35,7 @@ export const draw = (data, high, low, diff, split, height, width, tf, dateOffset
         });
     }
 
-    const drawPriceAxis=async() => {
+    const drawPriceAxis=async(high, low) => {
         let diffSpace =(high - low)/split
         let [rds, xPrice] = await roundedSpace(diffSpace, high)
         let xPx = ((high - xPrice)/diff)*height
@@ -53,7 +59,7 @@ export const draw = (data, high, low, diff, split, height, width, tf, dateOffset
         }
     }
 
-    const drawDateAxis = async()=>{
+    const drawDateAxis = async(data)=>{
         let x = 10;
         let compare = getDate(data[0].date)
         switch(tf){
@@ -84,9 +90,9 @@ export const draw = (data, high, low, diff, split, height, width, tf, dateOffset
         }
         return (<div></div>)
     }
-    drawMain()
-    drawPriceAxis()
-    drawDateAxis()
+    drawMain(await scaled)
+    drawPriceAxis(await high, await low)
+    drawDateAxis(await scaled)
 }
 
 const addDate = (time, x, ctx, height, ctx_Date_Pos) => {
@@ -102,3 +108,16 @@ const addDate = (time, x, ctx, height, ctx_Date_Pos) => {
     ctx.fillStyle = 'red'
     ctx.fillText(time, x, (height))
 }
+// draw(await scaled, 
+//     mainHigh,
+//     mainLow,
+//     mainDiff,
+//     10,
+//     mainDivHeight,
+//     mainDivWidth,
+//     tf,
+//     dateOffset,
+//     priceOffset,
+//     mainCtx,
+// export const draw = (data, height, width, tf, dateOffset, priceOffset, ctx, x) => {
+// )

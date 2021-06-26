@@ -2,34 +2,36 @@ import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../AuthContainer";
 import useState from "react-usestateref";
 
-import { findHighLow, getPlot } from '../utils/utils'
+import { magHighLow } from '../utils/utils'
+ 
+
 
 export const Magnify = () => {
-    const { magnifyStart, setMagnifyStart } = useContext(AuthContext)
-    const { spaceX } = useContext(AuthContext)
-
-    const { mainDiff } = useContext(AuthContext);
-    const { mainHigh } = useContext(AuthContext);
-    const { mainCtx } = useContext(AuthContext)
-
-    const actualStart = Math.ceil(magnifyStart/spaceX)
+    const { data } = useContext(AuthContext);
+    const { magnifyStart, setMagnifyStart, magnifyStartRef } = useContext(AuthContext)
     const { mainReady } = useContext(AuthContext);
+    const { magHigh } = useContext(AuthContext);
+    const { magLow } = useContext(AuthContext);
+    const { mainCtx } = useContext(AuthContext);
+
+    const { x } = useContext(AuthContext)
+    const windowSize = 150;
 
     useEffect( async ()=>{
-    const [magHigh, magLow ] = await findHighLow(await getPlot(data));
-    magHighLow(mainDiff, mainHigh, await magLow, await magHigh)
-
+        setMagnifyStart(data.length-windowSize)
+        [magHigh, magLow] = magHighLow(data, magnifyStartRef.current, windowSize)
+        setMagHigh(magHigh)
+        setMagLow(magLow)
     }, [mainReady])
 
 
-    useEffect(() => {
-        const zoom = document.getElementById("zoom"),
-            zoomCtx = zoom.getContext("2d");
-    }, [mainCtx]);
+    const zoom = document.getElementById("zoom"),
+        zoomCtx = zoom.getContext("2d");
+    // const actualStart = Math.ceil(magnifyStart/spaceX)
 
-
-    // zoomCtx.fillRect(0, 0, zoom.width, zoom.height);
-    // zoomCtx.drawImage(can, start, windowHigh, windowSize*x, (windowLow-windowHigh), 0, 0, zoomWidth, zoomHeight);
+     zoomCtx.fillRect(0, 0, zoom.width, zoom.height);
+     // zoomCtx.drawImage(mainCtx, magnifyStartRef.current, windowHigh, windowSize*x, (windowLow-windowHigh), 0, 0, zoomWidth, zoomHeight);
+     zoomCtx.drawImage(mainCtx, magnifyStartRef.current, magHigh, windowSize*x, (magLow-magHigh), 0, 0, zoomWidth, zoomHeight);
     return(
         <div className="zoomWrapper">
             <canvas
