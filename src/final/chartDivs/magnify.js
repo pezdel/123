@@ -5,26 +5,27 @@ import useState from "react-usestateref";
 import { findHighLow, getPlot } from '../utils/utils'
 
 export const Magnify = () => {
-    // const { setMagnify, magnifyRef } = useContext(AuthContext)
-    // const { spaceX } = useContext(AuthContext)
+    const { magnifyStart, setMagnifyStart } = useContext(AuthContext)
+    const { spaceX } = useContext(AuthContext)
 
-    // const actualStart = Math.ceil(magnifyRef.current/spaceX)
-    // const [high, low, diff] = await findHighLow(await getPlot());
+    const { mainDiff } = useContext(AuthContext);
+    const { mainHigh } = useContext(AuthContext);
+    const { mainCtx } = useContext(AuthContext)
 
-    // let spaceTop = fullDiff / 100,
-    //     spaceBot = 4;
-    // const windowLow = Math.ceil((100 - (fullDiff - (fullHigh - low)) / spaceTop) * spaceBot)
-    // const windowHigh = Math.ceil((100 - (fullDiff - (fullHigh - high)) / spaceTop) * spaceBot)
+    const actualStart = Math.ceil(magnifyStart/spaceX)
+    const { mainReady } = useContext(AuthContext);
 
-    const { mainCtx, setMainCtx } = useContext(AuthContext)
+    useEffect( async ()=>{
+    const [magHigh, magLow ] = await findHighLow(await getPlot(data));
+    magHighLow(mainDiff, mainHigh, await magLow, await magHigh)
+
+    }, [mainReady])
 
 
-   useEffect(() => {
+    useEffect(() => {
         const zoom = document.getElementById("zoom"),
-           zoomCtx = zoom.getContext("2d");
-       console.log(mainCtx)
-
-   }, [mainCtx]);
+            zoomCtx = zoom.getContext("2d");
+    }, [mainCtx]);
 
 
     // zoomCtx.fillRect(0, 0, zoom.width, zoom.height);
@@ -46,21 +47,3 @@ export const Magnify = () => {
 
 
 
-//so when the data loads and div is set...this fires and it should load the first position
-//then when they move the mouse the window needs to update
-//
-//what is needed from main?...just the canvas id?
-//
-//what needs to be exported from zoom if anything?...4 params that are used to set window location? 2 for price magnify and 2 for date magnify
-
-
-// data,
-// start,
-// windowsize,
-// fulldiff,
-// fullhigh, 
-// x,
-// zoomHeight,
-// zoomWidth,
-// dateOffset,
-// priceOffset

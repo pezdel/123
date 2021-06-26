@@ -68,12 +68,21 @@ export const roundedSpace = async (diffSpace, high) => {
     }
 }
 
-// const getPlot = async () => {
+// const getPlot = async (data) => {
 //     let plot = [[]];
 //     for (let i = actualStart; i < actualStart + windowSize; i++) {
 //         plot.push(data[i]);
 //     }
 //     return plot;
 // };
+
+ // const magHighLow = (mainDiff, mainHigh, magLow, magHigh) => {
+ //        let spaceTop = fullDiff / 100,
+ //            spaceBot = 4;
+ //        const windowLow = Math.ceil((100 - (mainDiff- (mainHigh- magLow)) / spaceTop) * spaceBot)
+ //        const windowHigh = Math.ceil((100 - (mainDiff- (mainHigh- magHigh)) / spaceTop) * spaceBot)
+
+ //        return [windowLow, windowHigh]
+ //    }
 
 

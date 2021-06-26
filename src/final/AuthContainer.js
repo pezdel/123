@@ -12,12 +12,12 @@ export const AuthContainer = (props) => {
     const [ mainDivWidth, setMainDivWidth, mainDivWidthRef] = useState(500);
     const [ mainDivHeight, setMainDivHeight ] = useState(500);
     const [ startX ] = useState(4) //for space between x's needed for div width too
-    const [ windowSize ] = useState(150)
     const [ magnify, setMagnify, magnifyRef ]= useState(0)
     
     const [ dateOffset ] = useState(15);
     const [ priceOffset ] = useState(100);
     const [ mainCtx, setMainCtx ] = useState(null)
+    const [ mainReady, setMainReady ] = useState(false)
 
     const value = {
         data,
@@ -39,7 +39,6 @@ export const AuthContainer = (props) => {
         startX,
         magnifyRef,
         setMagnify,
-        windowSize,
         mainDiff,
         setMainDiff,
         mainDiffRef,
@@ -47,6 +46,8 @@ export const AuthContainer = (props) => {
         priceOffset,
         mainCtx,
         setMainCtx,
+        mainReady,
+        setMainReady,
     };
 
 

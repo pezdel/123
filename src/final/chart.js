@@ -7,27 +7,8 @@ import { Magnify } from './chartDivs/magnify';
 // import { Price } from './chartDivs/price';
 // import { Date } from './chartDivs/date';
 
-
 export const Chart = () => {
-    const { data } = useContext(AuthContext);
-    const { setMainDivWidth } = useContext(AuthContext); 
-
-    const { windowSize } = useContext(AuthContext)
-    const { startX } = useContext(AuthContext)
-    const { setMagnify } = useContext(AuthContext)
-    const { priceOffset } = useContext(AuthContext)
-
-    // const zoomHeight = 700;
-    // const zoomWidth = 1200;
-    // const windowSize = Math.ceil(zoomWidth / 3);
-    // const x = 4;
-
-    useEffect(async () => {
-        if (data.length !== 0) {
-            setMainDivWidth((data.length * startX)+priceOffset);
-            setMagnify((data.length - windowSize) * startX);
-        }
-    }, [data]);
+   
 
     // const [jump, setJump, jumpRef] = useState(0);
     // const [isDrawing, setIsDrawing] = useState(false);
