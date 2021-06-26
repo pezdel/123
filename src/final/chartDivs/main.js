@@ -36,11 +36,11 @@ export const Main = () => {
         mainLow,
         mainDiff
     useEffect(async() => {
-        if (mainCtx !== null && mainReady == true) {
+        if (mainReady == true) {
             [mainHigh, mainLow, mainDiff] = await findHighLow(data)
             draw (data, mainDivHeight, mainDivWidth, tf, dateOffset, priceOffset, mainCtx, x, mainHigh, mainLow, mainDiff)
 
-            setMagnifyStart(data.length-windowSize)
+             setMagnifyStart(data.length-windowSize)
             updateMagnify()
         }
     }, [mainReady]);
@@ -50,8 +50,6 @@ export const Main = () => {
         setMagnifyHigh(magnifyHigh)
         setMagnifyLow(magnifyLow)
     }
-
-
 
     return (
         <div className="chartAreaWrapper">
