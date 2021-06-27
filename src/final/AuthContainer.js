@@ -12,9 +12,10 @@ export const AuthContainer = (props) => {
     const [ mainDivWidth, setMainDivWidth ] = useState(500);
     const [ magnifyStart, setMagnifyStart, magnifyStartRef ] = useState(0)
     
-    const [ mainReady, setMainReady ] = useState(false)
-    const [ magnifyHigh, setMagnifyHigh ] = useState(0);
-    const [ magnifyLow, setMagnifyLow ] = useState(0);
+    const [ magnifyHigh, setMagnifyHigh, magnifyHighRef ] = useState(0);
+    const [ magnifyLow, setMagnifyLow, magnifyLowRef ] = useState(0);
+    const [ magReady, setMagReady ] = useState(false);
+    const [ mainReady, setMainReady ] = useState(false);
 
 
     const value = {
@@ -39,6 +40,12 @@ export const AuthContainer = (props) => {
         setMagnifyHigh,
         magnifyLow,
         setMagnifyLow,
+        magReady,
+        setMagReady,
+        mainDivWidth,
+        setMainDivWidth,
+        magnifyHighRef,
+        magnifyLowRef,
     };
 
 

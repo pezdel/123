@@ -18,8 +18,8 @@ export const windowHighLowPx = async (data, start, windowSize, mainHigh, mainDif
 
 
     const plot = getPlot()
-    const [magHigh, magLow, magDiff ] = await findHighLow(await plot);
-    const [magnifyHigh, magnifyLow] = await getMagHighLow(magLow, magHigh)
+    const [magHigh, magLow, magDiff ] = findHighLow(await plot);
+    const [magnifyHigh, magnifyLow] = getMagHighLow( magLow, magHigh)
 
     return [magnifyHigh, magnifyLow, magDiff]
 }
@@ -34,7 +34,7 @@ export const windowHighLowPx = async (data, start, windowSize, mainHigh, mainDif
 
 
 
-export const findHighLow = async (data) => {
+export const findHighLow = (data) => {
     let high = 0, 
         low;
     data.forEach((el) => {

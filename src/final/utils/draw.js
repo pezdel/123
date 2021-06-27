@@ -1,10 +1,12 @@
 import { getDate, roundedSpace, getP } from './utils';
-import { scale, findHighLow } from './utils';
+import { scale } from './utils';
+import { mainDivHeight, dateOffset, priceOffset, x } from './const'
 
-
-export const draw = async (data, height, width, tf, dateOffset, priceOffset, ctx, x, high, low, diff) => {
+             // draw (data, mainDivWidth, tf, mainCtx)
+// export const draw = async (data, height, width, tf, dateOffset, priceOffset, ctx, x, high, low, diff) => {
+export const draw = async(data, width, tf, ctx, high, low, diff) => {
     const split = 10;
-    // const [high, low, diff] = await findHighLow(data)
+    const height = mainDivHeight;
     
 
     const ctx_Date_Pos = height-dateOffset, 

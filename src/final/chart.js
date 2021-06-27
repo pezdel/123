@@ -2,56 +2,42 @@ import React, { useContext, useEffect } from "react";
 import { AuthContext } from "./AuthContainer";
 import useState from "react-usestateref";
 
+import { x, windowSize, mainDivHeight, priceOffset } from './utils/const';
+import { findHighLow } from './utils/utils';
+
 import { Main } from './chartDivs/main';
 import { Magnify } from './chartDivs/magnify';
 // import { Price } from './chartDivs/price';
 // import { Date } from './chartDivs/date';
 
 export const Chart = () => {
-   
+    const { data } = useContext(AuthContext);
+    const { setMainDivWidth } = useContext(AuthContext);
 
-    // const [jump, setJump, jumpRef] = useState(0);
-    // const [isDrawing, setIsDrawing] = useState(false);
-    // const [startX, setStartX, startXRef] = useState(0);
+    const { setMagnifyStart, magnifyStartRef } = useContext(AuthContext)
+    const { setMainReady } = useContext(AuthContext);
 
-    // const startDrawing = ({ nativeEvent }) => {
-    //     const { offsetX, offsetY } = nativeEvent;
-    //     setStartX(offsetX);
-    //     setIsDrawing(true);
-    // };
-    // const isDraw = ({ nativeEvent }) => {
-    //     if (!isDrawing) {
-    //         return;
-    //     }
-    //     const { offsetX, offsetY } = nativeEvent;
-    //     setJump(Math.ceil(offsetX - startXRef.current));
+    const { setMainHigh } = useContext(AuthContext);
+    const { setMainLow } = useContext(AuthContext);
+    const { setMainDiff } = useContext(AuthContext);
 
-    //     if (
-    //         startCordRef.current - jumpRef.current > 0 &&
-    //         startCordRef.current - jumpRef.current < divWidth - windowSize * 4
-    //     ) {
-    //         setStartCord(startCordRef.current - jumpRef.current);
-    //         magnify(
-    //             data,
-    //             startCordRef.current,
-    //             windowSize,
-    //             fullDiff,
-    //             fullHighRef.current,
-    //             x,
-    //             zoomHeight,
-    //             zoomWidth
-    //         );
-    //         setStartX(offsetX);
-    //     }
-    // };
-    // const finishDrawing = () => {
-    //     setIsDrawing(false);
-    // };
+    useEffect(async() => {
+        setMainReady(false)
+        if (data.length !== 0) {
+            const [mainHigh, mainLow, mainDiff] = findHighLow(data)
+            setMagnifyStart(data.length-windowSize)
+            setMainDivWidth((data.length * x)+priceOffset);
+            setMainHigh(mainHigh)
+            setMainLow(mainLow)
+            setMainDiff(mainDiff)
+            setMainReady(true)  
+        }
+    }, [data]);
 
     return (
         <div className="chartWrapper">
             <Main />
-             <Magnify />
+            <Magnify />
         </div>
     );
 };

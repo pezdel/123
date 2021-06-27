@@ -12,3 +12,4 @@ export const mainDivHeight = 500;
 export const zoomHeight = 300;
 
 export const zoomWidth = 300;
+
