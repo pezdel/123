@@ -40,15 +40,15 @@ export const Main = () => {
             [mainHigh, mainLow, mainDiff] = await findHighLow(data)
             draw (data, mainDivHeight, mainDivWidth, tf, dateOffset, priceOffset, mainCtx, x, mainHigh, mainLow, mainDiff)
 
-             setMagnifyStart(data.length-windowSize)
+            setMagnifyStart(data.length-windowSize)
             updateMagnify()
         }
     }, [mainReady]);
 
     const updateMagnify = async () => {
-        const [magnifyHigh, magnifyLow] = await windowHighLowPx(data, magnifyStartRef.current, windowSize, mainHigh, mainDiff)
-        setMagnifyHigh(magnifyHigh)
-        setMagnifyLow(magnifyLow)
+        const [magHigh, magLow] = await windowHighLowPx(data, magnifyStartRef.current, windowSize, mainHigh, mainDiff, mainDivHeight )
+        setMagnifyHigh(magHigh)
+        setMagnifyLow(magLow)
     }
 
     return (

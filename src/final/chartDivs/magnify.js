@@ -7,27 +7,28 @@ import { magHighLow } from '../utils/utils'
 
 
 export const Magnify = () => {
-    const { mainReady } = useContext(AuthContext);
-    const { magHigh } = useContext(AuthContext);
-    const { magLow } = useContext(AuthContext);
-    const { mainCtx } = useContext(AuthContext);
     const { magnifyStart, setMagnifyStart, magnifyStartRef } = useContext(AuthContext)
+    const { magnifyHigh, setMagnifyHigh } = useContext(AuthContext);
+    const { magnifyLow, setMagnifyLow } = useContext(AuthContext);
+ 
     const windowSize = 150
     const { x } = useContext(AuthContext)
-    const zoomHeight = 500;
-    const zoomWidth =500;
+    const zoomHeight = 300;
+    const zoomWidth = 300;
 
 
-    const zoomCanvas = useRef(null);
+    // const zoomCanvas = useRef(null);
     useEffect(() => {
-        if (mainReady == true){
-            const zoomCtx = zoomCanvas.current.getContext('2d');
+        if (magnifyStart !== null){
+            const zoom = document.getElementById('zoom')
+            const zoomCtx = zoom.getContext('2d');
             const can = document.getElementById('main')
-            console.log(can)
             zoomCtx.fillRect(0, 0, zoomWidth, zoomHeight);
-            zoomCtx.drawImage(can, magnifyStartRef.current, magHigh, windowSize*x, (magLow-magHigh), 0, 0, zoomWidth, zoomHeight);
+            zoomCtx.drawImage(can, magnifyStartRef.current*x, magnifyHigh, windowSize*x, (magnifyLow-magnifyHigh), 0, 0, zoomWidth, zoomHeight);
+            // zoomCtx.drawImage(can, magnifyStartRef.current, magHigh, windowSize*x, (magLow-magHigh), 0, 0, zoomWidth, zoomHeight);
+    // zoomCtx.drawImage(can, start, 300, zoom.width, 200, 0,0, zoom.width, zoom.height);
         }
-    }, [mainReady])
+    }, [magnifyStart])
 
     // useEffect(() => {
     //     if (mainReady == true){
@@ -44,7 +45,6 @@ export const Magnify = () => {
     return(
         <div className="zoomWrapper">
             <canvas
-            ref={zoomCanvas}
             id="zoom"
             width={zoomWidth}
             height={zoomHeight}

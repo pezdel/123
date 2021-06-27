@@ -1,5 +1,5 @@
 
-export const windowHighLowPx = async (data, start, windowSize, mainHigh, mainDiff) => {
+export const windowHighLowPx = async (data, start, windowSize, mainHigh, mainDiff, height) => {
 
     const getPlot = async () => {
         let plot = [[]];
@@ -10,20 +10,22 @@ export const windowHighLowPx = async (data, start, windowSize, mainHigh, mainDif
     };
 
     const getMagHighLow= (magLow, magHigh) => {
-        let spaceTop = mainDiff / 100,
-            spaceBot = 4;
-        const windowLow = Math.ceil((100 - (mainDiff- (mainHigh- magLow)) / spaceTop) * spaceBot)
-        const windowHigh = Math.ceil((100 - (mainDiff- (mainHigh- magHigh)) / spaceTop) * spaceBot)
+        // let spaceTop = mainDiff / 100,
+            // spaceBot = 4;
+        // const windowLow = Math.ceil((100 - (mainDiff- (mainHigh- magLow)) / spaceTop) * spaceBot)
+        // const windowHigh = Math.ceil((100 - (mainDiff- (mainHigh- magHigh)) / spaceTop) * spaceBot)
+        const windowLow = Math.ceil(((mainHigh-magLow)/mainDiff)*height)
+        const windowHigh= Math.ceil(((mainHigh-magHigh)/mainDiff)*height)
 
-        return [windowLow, windowHigh]
+        return [windowHigh, windowLow]
     }
 
 
     const plot = getPlot()
     const [magHigh, magLow, magDiff ] = await findHighLow(await plot);
-    const [magnifyHigh, magnifyLow] = await getMagHighLow(await magLow, await magHigh)
+    const [magnifyHigh, magnifyLow] = await getMagHighLow(magLow, magHigh)
 
-    return [magnifyHigh, magnifyLow]
+    return [magnifyHigh, magnifyLow, magDiff]
 }
 
 
