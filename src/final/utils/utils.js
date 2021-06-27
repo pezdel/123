@@ -10,10 +10,6 @@ export const windowHighLowPx = async (data, start, windowSize, mainHigh, mainDif
     };
 
     const getMagHighLow= (magLow, magHigh) => {
-        // let spaceTop = mainDiff / 100,
-            // spaceBot = 4;
-        // const windowLow = Math.ceil((100 - (mainDiff- (mainHigh- magLow)) / spaceTop) * spaceBot)
-        // const windowHigh = Math.ceil((100 - (mainDiff- (mainHigh- magHigh)) / spaceTop) * spaceBot)
         const windowLow = Math.ceil(((mainHigh-magLow)/mainDiff)*height)
         const windowHigh= Math.ceil(((mainHigh-magHigh)/mainDiff)*height)
 
