@@ -15,7 +15,7 @@ export const Main = () => {
     const { mainLow } = useContext(AuthContext);
     const { mainDiff } = useContext(AuthContext);
     const { setMagReady } = useContext(AuthContext);
-    
+
     useEffect(async() => {
         setMagReady(false)
         if (mainReady == true) {
