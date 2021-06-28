@@ -10,3 +10,17 @@ export const mainCanvas = () => {
     const mainCtx = can.getContext('2d');
     return mainCtx
 }
+
+export const priceCanvas = () => {
+    const can = document.getElementById('main');
+    const priceAxis = document.getElementById('price');
+    const priceCtx = priceAxis.getContext('2d');
+    return [can, priceCtx]
+}
+
+export const dateCanvas = () => {
+    const can = document.getElementById('main');
+    const dateAxis = document.getElementById('date');
+    const dateCtx = dateAxis.getContext('2d');
+    return [can, dateCtx]
+}

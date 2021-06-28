@@ -1,23 +1,33 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../AuthContainer";
 import useState from "react-usestateref";
 
-
-
+import { priceHeight, priceWidth, priceOffset, x } from '../utils/const';
+import { priceCanvas } from '../utils/canvas';
 
 export const Price = () => {
-    const can = document.getElementById("main"),
-        ctx = can.getContext("2d"),
-        zoom = document.getElementById("price"),
-        zoomCtx = zoom.getContext("2d");
-    zoomCtx.fillStyle = 'red'
-    zoomCtx.fillRect(0, 0, zoom.width, zoom.height);
-    // zoomCtx.drawImage(can, start, windowHigh, windowSize*x, (windowLow-windowHigh), 0, 0, zoomWidth, zoomHeight);
+    const { magReady } = useContext(AuthContext);
+    const { mainDivWidth } = useContext(AuthContext);
+    const { magnifyHighRef } = useContext(AuthContext);
+    const { magnifyLowRef } = useContext(AuthContext);
+
+    const drawZoom = (can, priceCtx) => {
+        priceCtx.fillRect(0, 0, priceWidth, priceHeight);
+        priceCtx.drawImage(can, mainDivWidth-priceOffset, magnifyHighRef.current, priceWidth, (magnifyLowRef.current-magnifyHighRef.current), 0, 0, priceWidth, priceHeight);
+    }
+
+    useEffect(async () => {
+        if (magReady== true){
+            const [can, priceCtx] = priceCanvas()
+            drawZoom(await can, await priceCtx)
+        }
+    }, [magReady, magnifyHighRef.current])
+
+
 
     return (
-        <div>
-            <canvas id="price" width={200} height={zoomHeight}></canvas>
+        <div className="priceWrapper">
+            <canvas id="price" width={priceWidth} height={priceHeight}></canvas>
         </div>
     )
 }
-// high, low, priceOffset

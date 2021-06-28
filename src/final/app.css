@@ -10,33 +10,16 @@
   width:200px;
 
 }
-/* 
-.chart-main{
-  position: relative;
-}
 
-.Chart{
-  position: absolute;
-  left:10%;
-  right:10%;
-  height:80vh;
-
-  background-color: burlywood;
-}
-
-#chart-main{
-  position:relative;
-  width:700px;
-  height:500px;
-} */
+/* ---------------------------------------------------------------------------------------------------------- */
 
 .chartWrapper{
   position: relative;
   
 }
 
-.chartAreaWrapper{
-  /* display:none; */ 
+.mainWrapper{
+  display:none; 
   overflow-x:scroll;
   overflow-y:scroll;
   width:500px;
@@ -48,38 +31,35 @@
 #main{
   
 }
-#price{
-    /* display:none; */
-}
-#date{
-    /* display:none; */
-}
+
+
 .zoomWrapper{
- /* display:none; */
   position:absolute;
   left: 100px;
   top: 100px;
 }
-
 #zoom{
    /* display:none; */
    border:1px rgb(136, 128, 128) solid;
    box-shadow: 6px 5px 10px #4e0d0d;  
    position:absolute; 
-  
+}
 
-     /* left:50%; */
-   /* display:none; */
+.priceWrapper{
+    position:absolute;
+    left: 30%;
 }
-/* .testWrapper{
-  position: relative;
+#price{
+    /* display:none; */
 }
-.testText{
-  position:absolute;
-  top:00px;
+
+
+.dateWrapper{
+    position:absolute;
+    top:400px;
+}
+#date{
+    /* display:none; */
+}
  
-}
-#testCan{
-  position:absolute;
-  top:100px;
-} */
+

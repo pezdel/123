@@ -13,9 +13,8 @@ export const draw = async(data, width, tf, ctx, high, low, diff) => {
         ctx_Price_Pos = width-priceOffset/2;
 
     const drawMain = async (data) => {
-        let x = 10;
         ctx.clearRect(0, 0, width, height);
-
+        let y = 10;
         data.forEach((el) => {
             if (el.open > el.close) {
                 ctx.strokeStyle = "green";
@@ -24,16 +23,16 @@ export const draw = async(data, width, tf, ctx, high, low, diff) => {
             }
             ctx.beginPath();
             ctx.lineWidth = 1;
-            ctx.moveTo(x, el.high);
-            ctx.lineTo(x, el.low);
+            ctx.moveTo(y, el.high);
+            ctx.lineTo(y, el.low);
             ctx.stroke();
 
             ctx.beginPath();
             ctx.lineWidth = 3;
-            ctx.moveTo(x, el.open);
-            ctx.lineTo(x, el.close);
+            ctx.moveTo(y, el.open);
+            ctx.lineTo(y, el.close);
             ctx.stroke();
-            x += 4;
+            y+=x;
         });
     }
 
@@ -62,7 +61,7 @@ export const draw = async(data, width, tf, ctx, high, low, diff) => {
     }
 
     const drawDateAxis = async(data)=>{
-        let x = 10;
+        let y = 10;
         let compare = getDate(data[0].date)
         switch(tf){
             case '1h':
@@ -70,24 +69,24 @@ export const draw = async(data, width, tf, ctx, high, low, diff) => {
                     let date= getDate(el.date)
                     if(date.Day != compare.Day){
                         compare.Day = date.Day;
-                        addDate(date.Day, x, ctx, height , ctx_Date_Pos)
-                    }x+=4
+                        addDate(date.Day, y, ctx, height , ctx_Date_Pos)
+                    }y+=x
                 })
             case '1d':
                 data.forEach((el)=>{
                     let date=getDate(el.date)
                     if(date.Month!=compare.Month){
                         compare.Month = date.Month;
-                        addDate(date.Month, x, ctx, height, ctx_Date_Pos)
-                    }x+=4
+                        addDate(date.Month, y, ctx, height, ctx_Date_Pos)
+                    }y+=x
                 }) 
             case '1w':
                 data.forEach((el)=>{
                     let date=getDate(el.date)
                     if(date.Month!=compare.Month){
                         compare.Month = date.Month;
-                        addDate(date.Month, x, ctx, height, ctx_Date_Pos)
-                    }x+=4
+                        addDate(date.Month, y, ctx, height, ctx_Date_Pos)
+                    }y+=x
                 })  
         }
         return (<div></div>)
@@ -98,18 +97,18 @@ export const draw = async(data, width, tf, ctx, high, low, diff) => {
     drawDateAxis(await scaled)
 }
 
-const addDate = (time, x, ctx, height, ctx_Date_Pos) => {
+const addDate = (time, y, ctx, height, ctx_Date_Pos) => {
     ctx.beginPath()
     ctx.lineWidth = 1
-    ctx.moveTo(x, 0)
-    ctx.lineTo(x, height)
+    ctx.moveTo(y, 0)
+    ctx.lineTo(y, height)
     ctx.strokeStyle = "red"
     ctx.stroke()
     //date
     ctx.font = '12px Arial'
     ctx.textAlign = 'start'
     ctx.fillStyle = 'red'
-    ctx.fillText(time, x, (height))
+    ctx.fillText(time, y, (height))
 }
 // draw(await scaled, 
 //     mainHigh,

@@ -15,7 +15,7 @@ export const Magnify = () => {
     const { setMagnifyLow, magnifyLowRef } = useContext(AuthContext);
     const { mainHigh } = useContext(AuthContext);
     const { mainDiff } = useContext(AuthContext);
-    const { mainDivWidth } = useContext(AuthContext);
+    // const { mainDivWidth } = useContext(AuthContext);
 
 
     const drawZoom = (can, zoomCtx) => {
@@ -41,9 +41,6 @@ export const Magnify = () => {
 
 
 
-
-
-
     const [jump, setJump, jumpRef] = useState(0);
     const [isDrawing, setIsDrawing] = useState(false);
     const [startX, setStartX, startXRef] = useState(0);
@@ -57,7 +54,6 @@ export const Magnify = () => {
         if (!isDrawing) {return; }
         const { offsetX, offsetY } = nativeEvent;
         setJump(Math.ceil(offsetX - startXRef.current));
-        console.log(magnifyStartRef.current)
         if ( magnifyStartRef.current - jumpRef.current > 0 && magnifyStartRef.current - jumpRef.current < data.length - windowSize ) 
         {
             setMagnifyStart(magnifyStartRef.current - jumpRef.current);

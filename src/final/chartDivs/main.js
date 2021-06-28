@@ -27,14 +27,13 @@ export const Main = () => {
 
 
     return (
-        <div className="chartAreaWrapper">
+        <div className="mainWrapper">
             <h1>{mainDivWidth}</h1>
             <h1>{mainDivHeight}</h1> 
             <canvas id="main"  width={mainDivWidth} height={mainDivHeight} ></canvas>
         </div>
     )
 }
-
-// setMainReady(true)
-// setMainReady(false)
-
+//nneed to figure out how to 
+//get it all in a div that can scale and doesnt fk it up
+//

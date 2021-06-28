@@ -7,8 +7,8 @@ import { findHighLow } from './utils/utils';
 
 import { Main } from './chartDivs/main';
 import { Magnify } from './chartDivs/magnify';
-// import { Price } from './chartDivs/price';
-// import { Date } from './chartDivs/date';
+import { Price } from './chartDivs/price';
+import { Date } from './chartDivs/date';
 
 export const Chart = () => {
     const { data } = useContext(AuthContext);
@@ -38,12 +38,12 @@ export const Chart = () => {
         <div className="chartWrapper">
             <Main />
             <Magnify />
+            <Price />
+            <Date />
         </div>
     );
 };
 
-//            <Price />
-//            <Date />
 
 
 
