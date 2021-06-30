@@ -2,7 +2,7 @@ import React, { useContext, useRef, useEffect } from "react";
 import { AuthContext } from "../AuthContainer";
 import useState from "react-usestateref";
 
-import { x, windowSize, mainDivHeight, dateOffset } from '../utils/const';
+import { x, windowSize, mainDivHeight, dateOffset, backgroundColor } from '../utils/const';
 import { magnifyCanvas } from '../utils/canvas'; 
 import { windowHighLowPx } from '../utils/utils';
  
@@ -20,6 +20,8 @@ export const Magnify = () => {
 
 
     const drawZoom = (can, zoomCtx) => {
+        zoomCtx.fillStyle = backgroundColor 
+        zoomCtx.clearRect(0, 0, zoomWidthRef.current, zoomHeightRef.current);
         zoomCtx.fillRect(0, 0, zoomWidthRef.current, zoomHeightRef.current);
         zoomCtx.drawImage(can, 
             magnifyStartRef.current*x, 
@@ -37,6 +39,7 @@ export const Magnify = () => {
 
     useEffect(async () => {
         if (magReady== true){
+            console.log(data)
             updateMagnify()
             const [can, magnifyAxis, magnifyCtx] = magnifyCanvas()
 

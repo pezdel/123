@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../AuthContainer";
 import useState from "react-usestateref";
 
-import { priceOffset, dateOffset } from '../utils/const';
+import { priceOffset, dateOffset, backgroundColor } from '../utils/const';
 import { priceCanvas } from '../utils/canvas';
 
 export const Price = () => {
@@ -15,6 +15,8 @@ export const Price = () => {
     const [ priceHeight, setPriceHeight, priceHeightRef ] = useState(100);
 
     const drawZoom = (can, priceCtx) => {
+        priceCtx.fillStyle = backgroundColor 
+        priceCtx.clearRect(0, 0, priceWidthRef.current, priceHeightRef.current);
         priceCtx.fillRect(0, 0, priceWidthRef.current, priceHeightRef.current);
         priceCtx.drawImage(can, 
             mainDivWidth-priceOffset, 

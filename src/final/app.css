@@ -50,7 +50,6 @@
 
 
 
-chartTest=chartWrapper
 
 
 
@@ -68,15 +67,16 @@ chartTest=chartWrapper
   height:500px;
   position: absolute;
   top:50px;
-  background-color: bisque; 
+  /* background-color: red; */ 
 }
 
 
 .chartWrapper{
     /* display:none; */
-    width:900px;
+    width:1000px;
     height:700px;
-    background-color: black;
+    border:1px rgb(136, 128, 128) solid; 
+    box-shadow: 6px 5px 10px #4e0d0d; 
   }
 
 .magnifyWrapper{

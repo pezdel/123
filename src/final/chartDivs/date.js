@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { AuthContext } from "../AuthContainer";
 import useState from "react-usestateref";
 
-import { dateHeight, dateWidth, dateOffset, mainDivHeight, x, windowSize } from '../utils/const';
+import { dateHeight, dateWidth, dateOffset, mainDivHeight, x, windowSize, backgroundColor } from '../utils/const';
 import { dateCanvas } from '../utils/canvas';
 
 export const Date = () =>{
@@ -14,6 +14,8 @@ export const Date = () =>{
     const [ dateHeight, setDateHeight, dateHeightRef ] = useState(100);
 
     const drawZoom = (can, dateCtx) => {
+        dateCtx.fillStyle = backgroundColor 
+        dateCtx.clearRect(0, 0, dateWidthRef.current, dateHeightRef.current);
         dateCtx.fillRect(0, 0, dateWidthRef.current, dateHeightRef.current);
         dateCtx.drawImage(can, magnifyStartRef.current*x, mainDivHeight-50, windowSize*x, dateHeightRef.current, 0, 0, dateWidthRef.current, dateHeightRef.current);
         // zoomCtx.drawImage(can, magnifyStartRef.current*x, magnifyHighRef.current, windowSize*x, (magnifyLowRef.current-magnifyHighRef.current), 0, 0, zoomWidth, zoomHeight);

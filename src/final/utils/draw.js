@@ -37,9 +37,10 @@ export const draw = async(data, width, tf, ctx, high, low, diff) => {
     }
 
     const drawPriceAxis=async(high, low) => {
+        console.log(height)
         let diffSpace =(high - low)/split
         let [rds, xPrice] = await roundedSpace(diffSpace, high)
-        let xPx = ((high - xPrice)/diff)*height
+        let xPx = ((high - xPrice)/diff)*(height-priceOffset)
         let rdsPx = ((high - (xPrice-rds))/diff)*height
 
         for(let i=0; i<split; i++){
@@ -47,18 +48,20 @@ export const draw = async(data, width, tf, ctx, high, low, diff) => {
             ctx.lineWidth=1
             ctx.moveTo(0, xPx)
             ctx.lineTo(width, xPx)
-            ctx.strokeStyle = "blue"
+            ctx.strokeStyle = "#c9c7c5"
             ctx.stroke()
 
-            ctx.font = '19px Arial'
+            ctx.font = '16px Times New Roman'
             ctx.textAlign = 'start'
-            ctx.fillStyle = 'blue'
+            ctx.fillStyle = 'grey' 
             ctx.fillText(xPrice, ctx_Price_Pos, xPx)
 
-            xPx = ((high - (xPrice-rds))/diff)*height
+            xPx = ((high - (xPrice-rds))/diff)*(height-priceOffset)
             xPrice -= rds
         }
     }
+
+
 
     const drawDateAxis = async(data)=>{
         let y = 10;
@@ -68,8 +71,13 @@ export const draw = async(data, width, tf, ctx, high, low, diff) => {
                 data.forEach((el)=>{
                     let date= getDate(el.date)
                     if(date.Day != compare.Day){
+                        if((date.Day-compare.Day)> 1){
+                            compare.Day = date.Day;
+                            addDate("", y, ctx, height , ctx_Date_Pos)
+                        }else{
                         compare.Day = date.Day;
-                        addDate(date.Day, y, ctx, height , ctx_Date_Pos)
+                            addDate(date.Month + "/" +date.Day, y, ctx, height , ctx_Date_Pos)
+                        }
                     }y+=x
                 })
             case '1d':
@@ -102,12 +110,12 @@ const addDate = (time, y, ctx, height, ctx_Date_Pos) => {
     ctx.lineWidth = 1
     ctx.moveTo(y, 0)
     ctx.lineTo(y, height)
-    ctx.strokeStyle = "red"
+    ctx.strokeStyle = "#c9c7c5"
     ctx.stroke()
     //date
-    ctx.font = '12px Arial'
+    ctx.font = '16px Times New Roman'
     ctx.textAlign = 'start'
-    ctx.fillStyle = 'red'
+    ctx.fillStyle = 'grey'
     ctx.fillText(time, y, (height))
 }
 // draw(await scaled, 

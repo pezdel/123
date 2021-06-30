@@ -9,7 +9,7 @@ export const dateOffset = 100;
 
 export const priceOffset = 100;
 
-export const windowSize = 350;
+export const windowSize = 250;
 
 export const mainDivHeight = 1500;
 
@@ -22,3 +22,7 @@ export const dateHeight = 100;
 export const dateWidth = 500;
 
 export const magSpace = 50;
+
+export const backgroundColor = 'white';
+
+
