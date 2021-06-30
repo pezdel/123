@@ -4,23 +4,19 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Dropdown } from "./final/dropdown";
 import { Chart } from "./final/chart";
 import { Snipit } from './final/snipit';
+//import { Test } from './final/test';
 
 const App: React.FC = () => {
   return (
-    <div className="chart-main">
+      <div className="chartmain">
       <AuthContainer>
-        <Dropdown />
-        <Chart />
-        <Snipit />
+          <Dropdown />
+          <Chart />
+          <Snipit />
       </AuthContainer>
-    </div>
+      </div>
   );
 };
 export default App;
 
-//onEffects
-//onLoad-----------done
-//onClick----------done
-
-//data change -> to re-window(0-40) re-scale re-draw
-//click move -> to re-window(var from click) re-scale re-draw
+// <Test />

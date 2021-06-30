@@ -1,17 +1,17 @@
 
 export const x = 6;
 
-export const dateOffset = 25; 
+export const dateOffset = 100; 
 
 export const priceOffset = 100;
 
-export const windowSize = 150;
+export const windowSize = 200;
 
-export const mainDivHeight = 1500;
+export const mainDivHeight = 1000;
 
-export const zoomHeight = 600;
+export const zoomHeight = 400;
 
-export const zoomWidth = 900;
+export const zoomWidth = 500;
 
 export const priceHeight = 500;
 

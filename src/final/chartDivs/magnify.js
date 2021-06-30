@@ -2,8 +2,8 @@ import React, { useContext, useRef, useEffect } from "react";
 import { AuthContext } from "../AuthContainer";
 import useState from "react-usestateref";
 
-import { x, windowSize, zoomHeight, zoomWidth, mainDivHeight } from '../utils/const';
-import { zoomCanvas } from '../utils/canvas'; 
+import { x, windowSize, mainDivHeight, dateOffset } from '../utils/const';
+import { magnifyCanvas } from '../utils/canvas'; 
 import { windowHighLowPx } from '../utils/utils';
  
 
@@ -15,16 +15,23 @@ export const Magnify = () => {
     const { setMagnifyLow, magnifyLowRef } = useContext(AuthContext);
     const { mainHigh } = useContext(AuthContext);
     const { mainDiff } = useContext(AuthContext);
+    const [ zoomHeight, setZoomHeight, zoomHeightRef ] = useState(500);
+    const [ zoomWidth, setZoomWidth, zoomWidthRef ] = useState(500);
     // const { mainDivWidth } = useContext(AuthContext);
 
 
     const drawZoom = (can, zoomCtx) => {
-        zoomCtx.fillRect(0, 0, zoomWidth, zoomHeight);
-        zoomCtx.drawImage(can, magnifyStartRef.current*x, magnifyHighRef.current, windowSize*x, (magnifyLowRef.current-magnifyHighRef.current), 0, 0, zoomWidth, zoomHeight);
+        zoomCtx.fillRect(0, 0, zoomWidthRef.current, zoomHeightRef.current);
+        zoomCtx.drawImage(can, 
+            magnifyStartRef.current*x, 
+            (magnifyHighRef.current-dateOffset/5), 
+            windowSize*x, 
+            (magnifyLowRef.current-magnifyHighRef.current), 
+            0, 0, zoomWidthRef.current, zoomHeightRef.current);
     }
 
     const updateMagnify = async () => {
-        const [magHigh, magLow] = await windowHighLowPx(data, magnifyStartRef.current, windowSize, mainHigh, mainDiff, mainDivHeight )
+        const [magHigh, magLow] = await windowHighLowPx(data, magnifyStartRef.current, windowSize, mainHigh, mainDiff, mainDivHeight-dateOffset )
         setMagnifyHigh(magHigh)
         setMagnifyLow(magLow)
     }
@@ -32,8 +39,11 @@ export const Magnify = () => {
     useEffect(async () => {
         if (magReady== true){
             updateMagnify()
-            const [can, zoomCtx] = zoomCanvas()
-            drawZoom(await can, await zoomCtx)
+            const [can, magnifyAxis, magnifyCtx] = magnifyCanvas()
+
+            setZoomWidth(magnifyAxis.parentNode.clientWidth)
+            setZoomHeight(magnifyAxis.parentNode.clientHeight)
+            drawZoom(await can, await magnifyCtx)
         }
     }, [magReady, magnifyStartRef.current])
 
@@ -65,9 +75,9 @@ export const Magnify = () => {
     }; 
 
     return(
-        <div className="zoomWrapper">
+        <div className="magnifyWrapper">
             <canvas
-            id="zoom"
+            id="magnify"
             width={zoomWidth}
             height={zoomHeight}
             onMouseDown={startDrawing}
@@ -77,3 +87,5 @@ export const Magnify = () => {
     </div>
     )};
 
+
+//just have to make the canvas magnify match the parent magnifyWrapper height/width

@@ -35,15 +35,15 @@ export const Chart = () => {
     }, [data]);
 
     return (
-        <div className="chartWrapper">
+        <div className="randomWrapper">
             <Main />
-            <Magnify />
-            <Price />
-            <Date />
+            <div className="chartWrapper">
+                <Magnify />
+                <Price />
+                <Date />
+            </div>
         </div>
     );
 };
-
-
 
 

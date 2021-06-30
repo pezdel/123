@@ -12,54 +12,176 @@
 }
 
 /* ---------------------------------------------------------------------------------------------------------- */
+/*  TODO---get chart in the below position....AND reduce size of magnify to match main chart*/
+/* .chartmain{ */
+/*     width:100%; */
+/* } */
 
-.chartWrapper{
-  position: relative;
-  
+/* .chartTest{ */
+/*     /1* display:flex; *1/ */
+/*     width:900px; */
+/*     height:500px; */
+/*     background-color: red; */
+/*     /1* flex-wrap: wrap; *1/ */ 
+/*     /1* align-items:stretch; *1/ */
+/* } */
+
+/* .canOneDiv{ */
+/*     background-color: orange; */
+/*     float:left; */
+/*     width:80%; */
+/*     height:80%; */
+/*     /1* flex-basis:80%; *1/ */
+/* } */
+
+/* .canTwoDiv{ */
+/*     background-color: blue; */
+/*     float:right; */
+/*     height:100%; */
+/*     width:20%; */
+/*     /1* flex-basis:20%; *1/ */
+/* } */
+/* .canThreeDiv{ */
+/*     background-color: bisque; */
+/*     float:left; */
+/*     width:80%; */
+/*     /1* flex-basis:80%; *1/ */
+/* } */
+
+
+
+chartTest=chartWrapper
+
+
+
+
+.randomWrapper{
+    width:100%
 }
+
 
 .mainWrapper{
   display:none; 
   overflow-x:scroll;
   overflow-y:scroll;
-  width:500px;
+  width:100%;
   height:500px;
   position: absolute;
   top:50px;
   background-color: bisque; 
 }
-#main{
-  
-}
 
 
-.zoomWrapper{
-  position:absolute;
-  left: 100px;
-  top: 100px;
+.chartWrapper{
+    /* display:none; */
+    width:900px;
+    height:600px;
+    background-color: black;
+  }
+
+.magnifyWrapper{
+    /* display:none; */
+    float:left;
+    width: 90%;
+    height:90%;
 }
-#zoom{
-   /* display:none; */
-   border:1px rgb(136, 128, 128) solid;
-   box-shadow: 6px 5px 10px #4e0d0d;  
-   position:absolute; 
+#magnify{
+    width:100%;
+    height:100%;
 }
+
 
 .priceWrapper{
-    position:absolute;
-    left: 30%;
-}
-#price{
     /* display:none; */
-}
+    float:right;
+    height:90%;
+    width:10%;
 
+}
 
 .dateWrapper{
-    position:absolute;
-    top:400px;
-}
-#date{
     /* display:none; */
+    float:left;
+    width:90%;
+    height:10%;
+    
 }
- 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .mainWrapper{ */
+/*   display:none; */ 
+/*   overflow-x:scroll; */
+/*   overflow-y:scroll; */
+/*   width:500px; */
+/*   height:500px; */
+/*   position: absolute; */
+/*   top:50px; */
+/*   background-color: bisque; */ 
+/* } */
+/* #main{ */
+/* } */
+
+/* .chartWrapper{ */
+/*   position: relative; */
+/*   width: 800px; */
+/* } */
+
+/* .magnifyWrapper{ */
+/*   position:absolute; */
+/*   left: 100px; */
+/*   top: 100px; */
+/* } */
+/* #magnify{ */
+/*    /1* display:none; *1/ */
+/*    border:1px rgb(136, 128, 128) solid; */
+/*    box-shadow: 6px 5px 10px #4e0d0d; */  
+/*    position:absolute; */ 
+/* } */
+
+/* .priceWrapper{ */
+/*     position:absolute; */
+/*     left: 30%; */
+/* } */
+/* #price{ */
+/*     /1* display:none; *1/ */
+/* } */
+
+
+/* .dateWrapper{ */
+/*     position:absolute; */
+/*     top:400px; */
+/* } */
+/* #date{ */
+/*     /1* display:none; *1/ */
+/* } */
+
+
+
+
+
+
+
+
+
+
+
 
