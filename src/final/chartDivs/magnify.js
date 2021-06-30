@@ -17,7 +17,6 @@ export const Magnify = () => {
     const { mainDiff } = useContext(AuthContext);
     const [ zoomHeight, setZoomHeight, zoomHeightRef ] = useState(500);
     const [ zoomWidth, setZoomWidth, zoomWidthRef ] = useState(500);
-    // const { mainDivWidth } = useContext(AuthContext);
 
 
     const drawZoom = (can, zoomCtx) => {
@@ -46,8 +45,6 @@ export const Magnify = () => {
             drawZoom(await can, await magnifyCtx)
         }
     }, [magReady, magnifyStartRef.current])
-
-
 
 
 
@@ -88,4 +85,5 @@ export const Magnify = () => {
     )};
 
 
-//just have to make the canvas magnify match the parent magnifyWrapper height/width
+//when you adjust chartsize, it should semi adjust window size?
+//

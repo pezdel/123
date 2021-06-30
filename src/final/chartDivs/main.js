@@ -34,5 +34,3 @@ export const Main = () => {
         </div>
     )
 }
-//nneed to figure out how to 
-//get it all in a div that can scale and doesnt fk it up

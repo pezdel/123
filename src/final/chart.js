@@ -2,7 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { AuthContext } from "./AuthContainer";
 import useState from "react-usestateref";
 
-import { x, windowSize, mainDivHeight, priceOffset } from './utils/const';
+import { x, windowSize, priceOffset, chartWidth, chartHeight } from './utils/const';
 import { findHighLow } from './utils/utils';
 
 import { Main } from './chartDivs/main';

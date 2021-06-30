@@ -1,4 +1,5 @@
 
+import { magSpace } from './const'
 export const windowHighLowPx = async (data, start, windowSize, mainHigh, mainDiff, height) => {
 
     const getPlot = async () => {
@@ -10,8 +11,8 @@ export const windowHighLowPx = async (data, start, windowSize, mainHigh, mainDif
     };
 
     const getMagHighLow= (magLow, magHigh) => {
-        const windowLow = Math.ceil(((mainHigh-magLow)/mainDiff)*height)
-        const windowHigh= Math.ceil(((mainHigh-magHigh)/mainDiff)*height)
+        const windowLow = Math.ceil(((mainHigh-magLow)/mainDiff)*height+magSpace)
+        const windowHigh= Math.ceil(((mainHigh-magHigh)/mainDiff)*height-magSpace)
 
         return [windowHigh, windowLow]
     }
